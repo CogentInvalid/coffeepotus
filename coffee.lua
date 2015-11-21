@@ -10,6 +10,7 @@ function coffee:init()
 
 	self.bgPos = -178
 
+	self.hasCup = true
 	self.hasPot = false
 	self.hasMaker = false
 
@@ -82,6 +83,7 @@ function coffee:newCup(x, y)
 	function cup.onClick()
 		if math.random() > 0.90 then
 			cup.destY = 700
+			self.hasCup = false
 		elseif cup.sipsLeft >= 1 then
 			if cup.sipsLeft == 1 and not self.hasPot then
 				self.clickables.pot = self:newPot(20, 200)
@@ -113,6 +115,10 @@ function coffee:newCup(x, y)
 				end
 			end
 		end
+
+		if not self.hasCup and cup.x < cup.destX + 100 and cup.y == 400 then
+			self.hasCup = true
+		end
 	end
 
 	return cup
@@ -125,7 +131,7 @@ function coffee:newPot(x, y)
 	pot.destY = y
 
 	function pot.onClick()
-		if pot.cupsLeft >= 1 then
+		if pot.cupsLeft >= 1 and self.hasCup then
 			if self.clickables.cup.sipsLeft < 3 then
 				sfx['pour']:play()
 				self.clickables.cup.sipsLeft = 3
@@ -157,6 +163,8 @@ function coffee:newMaker(x, y)
 		if self.clickables.pot.cupsLeft < 2 then
 			self.clickables.pot.destX = maker.x + 75
 			self.filling = true
+			sfx['maker']:play()
+			sfx['maker']:setLooping(true)
 			self.fillTimer = 0
 		end
 	end
@@ -174,6 +182,7 @@ function coffee:newMaker(x, y)
 			if self.clickables.pot.cupsLeft >= 2 then
 				self.clickables.pot.destX = 20
 				self.filling = false
+				sfx['maker']:stop()
 			end
 		end
 	end
