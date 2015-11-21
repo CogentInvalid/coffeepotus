@@ -132,6 +132,7 @@ function speech:getThing(thing)
 	end
 	
 	
+	
 	local ugh = {false,false,false}
 	self.answer = {}
 
