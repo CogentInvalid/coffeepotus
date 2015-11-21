@@ -12,8 +12,8 @@ function speech:init(parent)
 	self.answerTimer = 1
 
 	self.finished = false
-	self.headline = "NO HEADLINE SET"
-	self.subtitle = "NO SUBTITLE SET"
+	self.headline = "PRESIDENT HAS GONE MUTE"
+	self.subtitle = "COULD NOT BE REACHED FOR COMMENT, OBVIOUSLY"
 
 end
 
