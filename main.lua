@@ -36,6 +36,8 @@ function love.load()
 	currentTut = 1
 	gameStarted = false
 
+	currentLevel = 1
+
 end
 
 function love.update(dt)
@@ -73,6 +75,12 @@ function love.draw()
 
 	debugger:draw()
 
+end
+
+function nextLevel()
+	currentLevel = currentLevel + 1
+	gameScreen.wobble = gameScreen.wobble + 0.15
+	coffee.drainRate = coffee.drainRate + 0.004
 end
 
 function love.keypressed(key)

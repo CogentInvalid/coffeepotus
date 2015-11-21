@@ -6,7 +6,7 @@ function paperwork:init(parent)
 
 	self.cursor = cursor:new({x=200,y=300})
 
-	local options = {"peas", "budget", "peas-reverse", "candy"}
+	local options = {"peas", "budget", "peas-reverse", "candy", "peas-quad"}
 	self.papx = math.random(50,150); self.papy = math.random(100,200) --target paper position
 	self:getThing(randomSelect(options))
 
@@ -42,6 +42,14 @@ function paperwork:getThing(thing)
 		self.losePaper = {"WORLD WAR 3 BEGINS", "'ALL BECAUSE OF THE PRESIDENT'S DEADLY CLUMSINESS' SAYS GENERAL"}
 		self.winPaper = {"WORLD PEAS UPHOLDED", "WHAT EVEN IS 'WORLD PEAS', IS IT LIKE A VEGETABLE OR SOMETHING"}
 	end
+	if thing == "peas-quad" then
+		self.successZone = {175,70,302,147}
+		self.failZone = {21,92,172,124}
+		self.winString = "PEAS ACHIEVED"
+		self.loseString = "PEAS DESTROYED"
+		self.losePaper = {"WORLD WAR 3 BEGINS", "GENERAL CITES PRESIDENT'S INABILITY TO PARSE QUADRUPLE NEGATIVES"}
+		self.winPaper = {"WORLD PEAS UPHOLDED", "DELICIOUS PEAS FOR PEOPLE OF ALL NATIONS"}
+	end
 	if thing == "budget" then
 		self.successZone = {118,147,158,196}
 		self.failZone = {55,131,224,194}
@@ -68,7 +76,7 @@ function paperwork:update(dt)
 		self.cursor:update(dt)
 	end
 
-	--debug(love.mouse.getX()-self.paper.x..', '..love.mouse.getY()-self.paper.y)
+	debug(love.mouse.getX()-self.paper.x..', '..love.mouse.getY()-self.paper.y)
 
 	self.paper.x = self.paper.x - (self.paper.x - self.papx)*5*dt
 	self.paper.y = self.paper.y - (self.paper.y - self.papy)*5*dt

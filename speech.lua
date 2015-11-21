@@ -4,7 +4,7 @@ function speech:init(parent)
 
 	self.parent = parent
 
-	local options = {"games", "jews", "colors", "allegations"}
+	local options = {"games", "jews", "colors", "allegations", "guns", "taxes", "geneology", "food", "war", "policy"}
 	self:getThing(randomSelect(options))
 
 	self.state = "wait"
@@ -64,7 +64,75 @@ function speech:getThing(thing)
 		self.winPaper = {"CONTROVERSY AVERTED", "ONLY SPOTS ON PRESIDENT'S RECORD ARE COFFEE STAINS"}
 		self.losePaper = {"PRESIDENT HATES ALLIGATORS!", "THE PEOPLE'S SUSPICIONS WERE TRUE AFTER ALL"}
 	end
+	
+	if thing == "guns" then
+		self.question = "What is your stance on gun control?"
+		op[1] = {"I am strongly opposed to\nthe arming of bears.", false, 2}
+		op[2] = {"Reasonable restrictions\nshould placed on guns", true, 2}
+		op[3] = {"The right to bear arms is\nsacred", true, 2}
+		self.winString = "A reasonable stance."
+		self.loseString = "What's so bad about bears?"
+		self.winPaper = {"PRESIDENT ENDS DEBATE","DEBATE MOVES ONTO EXPLOSIVES CONTROL DEBATES"}
+		self.losePaper = {"PRESIDENT HATES BEARS", "POLLING DROPS AMONG BEAR DEMOGRAPHIC"}
+	end
+		
+	if thing == "taxes" then
+		self.question = "What is your opinion on taxes?"
+		op[1] = {"I shall keep the taxes\nas low as possible.", true, 2}
+		op[2] = {"Death to the taxes!", true, 1}
+		op[3] = {"Death to the poor, via\ntaxes!", false, 2}
+		self.winString = "Popular stance"
+		self.loseString = "But the poor..."
+		self.winPaper = {"PRES PROMISES LOW TAXES", "PEOPLE CELEBRATE"}
+		self.losePaper = {"PRES HATES THE POOR", "DRAMATIC TAX INCREASES ON THE POOR"}
+	end
+	
+	if thing == "geneology" then
+		self.question = "Which leader would you most like to be related to?"
+		op[1] = {"Adolf Hitler", false,1}
+		op[2] = {"Abraham Lincoln", true, 1}
+		op[3] = {"Nicholas Cage", true, 1}
+		self.winString = "An admirable role model."
+		self.loseString = "A NAZI!"
+		self.winPaper = {"PRES RECOGNIZES A TRUE HERO", "CELEBRITIES OFFER THEIR APPROVAL"}
+		self.losePaper = {"PRES HOPES TO BE LITERALLY HITLER", "POLITICAL ANALYSTS 'DID NAZI THAT COMING'"}
+	end
+		
+	if thing == "food" then
+		self.question = "What is your favorite food?"
+		op[1] = {"Hamburger", true, 1}
+		op[2] = {"Pizza", true, 1}
+		op[3] = {"Whale", false, 1}
+		self.winString = "An American classic."
+		self.loseString = "The poor whales..."
+		self.winPaper = {"PRES HAS GOOD TASTE IN FOOD", "FEW ARE SURPRISED"}
+		self.losePaper = {"PRESIDENT EATS WHALES", "ANIMAL CONSERVATIONISTS HORRIFIED"}
+	end
 
+	if thing == "policy" then
+		self.question = "Tell us about your plans for foreign trade policy, especially in the Middle East. Our dependence on foreign oil has long been a decisive factor in our trade policy; do you intend on changing this fact and if so, how?"
+		op[1] = {"That's a very good\nquestion. 9/11.", true, 2}
+		op[2] = {"What? I... I don't know.\nWhat do you want me\nto say?", false, 3}
+		op[3] = {"Maybe... maybe bomb\neveryone?", false, 2}
+		self.winString = "(standing ovation)"
+		self.loseString = "WOW. You're so bad at this."
+		self.winPaper = {"PRESIDENT MENTIONS 9/11", "PRESIDENT MENTIONS 9/11"}
+		self.losePaper = {"PRESIDENT UNINFORMED", "IS HE EVEN FIT TO LEAD OUR NATION? (NO)"}
+	end
+	
+	if thing == "war" then
+		self.question = "How do you plan to wage the war on terror?"
+		op[1] = {"With careful calculation\nand strategy", true, 2}
+		op[2] = {"With rapid, unrelenting\nstrikes", true, 2}
+		op[3] = {"By deploying more trolls", false, 1}
+		self.winString = "A good plan"
+		self.loseString = "A strange plan..."
+		self.winPaper = {"PRESIDENT PLANS BOLD OFFENSIVE", "MORALE OF TROOPS INCREASES"}
+		self.losePaper = {"TROLL ENLISTMENT PLANNED", "THE TROLLS HAVE NOT YET BEEN LOCATED"}
+	end
+	
+	
+	
 	local ugh = {false,false,false}
 	self.answer = {}
 
