@@ -73,7 +73,6 @@ function speech:getThing(thing)
 		self.winString = "A reasonable stance."
 		self.loseString = "Massacres predicted, probably cause: Presidential Decision"
 		self.winPaper = {"PRESIDENT ENDS GUN CONTROL DEBATE","DEBATE MOVES ONTO EXPLOSIVES CONTROL DEBATES"}
-		self.losePaper = {"PRESIDENT PROMOTES MASSACRES", "FUNERAL HOMES PREDICT PROFIT"}
 		self.losePaper = {"PRESIDENT HATES BEARS", "POLLING DROPS AMONG BEAR DEMOGRAPHIC"}
 	end
 		
