@@ -241,6 +241,7 @@ function coffee:newFixer()
 	function fixer.onClick()
 		if not self.filling then
 			self.fixed = true
+			sfx['ding']:play()
 			fixer.lights = imgMan:getImage('maker-status-fixed')
 			self.fixing = true
 		end
