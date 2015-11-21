@@ -60,7 +60,7 @@ function game:update(delta)
 		if self.currentMinigame.finished then
 			if self.timer ~= 0 then
 				self.timer = 0
-				self.endTimer = 1.5
+				self.endTimer = self.currentMinigame.finishTime or 1.5
 			end
 		end
 
