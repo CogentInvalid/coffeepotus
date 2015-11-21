@@ -4,7 +4,7 @@ function speech:init(parent)
 
 	self.parent = parent
 
-	local options = {"games", "jews", "colors", "allegations"}
+	local options = {"games", "jews", "colors", "allegations", "guns", "taxes", "geneology", "food"}
 	self:getThing(randomSelect(options))
 
 	self.state = "wait"
@@ -64,6 +64,48 @@ function speech:getThing(thing)
 		self.winPaper = {"CONTROVERSY AVERTED", "ONLY SPOTS ON PRESIDENT'S RECORD ARE COFFEE STAINS"}
 		self.losePaper = {"PRESIDENT HATES ALLIGATORS!", "THE PEOPLE'S SUSPICIONS WERE TRUE AFTER ALL"}
 	end
+	
+	if thing == "guns" then
+		self.question = "What is your stance on gun control?"
+		op[1] = {"Guns should be shot uncontrollably\n", false, 1}
+		op[2] = {"Reasonable restrictions \n should placed on guns\n", true, 2}
+		op[3] = {"The right to bear arms is sacred\n", true, 1}
+		self.winString = "A reasonable stance"
+		self.loseString = "Massacres predicted, probably cause: Presidential Decision"
+		self.winPaper = {"PRESIDENT ENDS GUN CONTROL DEBATE","DEBATE MOVES ONTO EXPLOSIVES CONTROL DEBATES"}
+		self.losePaper = {"PRESIDENT ENCOURAGES MASSACRES", "FUNERAL HOMES PREDICT PROFIT"}
+		
+	if thing = "taxes" then
+		self.question = "What is your opinion on taxes?"
+		op[1] = {"I shall keep the taxes as low as possible\n", true, 1}
+		op[2] = {"Death to the taxes\n", true, 1}
+		op[3] = {"Death to the poor, via taxes\n", false, 1}
+		self.winString = "Popular stance"
+		self.loseString = "But the poor..."
+		self.winPaper = {"PRESIDENT PROMISES LOW TAXES", "PEOPLE CELEBRATE"}
+		self.losePaper = {"PRESIDENT HATE THE POOR", "DRAMATIC TAX INCREASES ON THE POOR"}
+	
+	if thing = "geneology" then
+		self.question = "Which leader would you most like to be related to?"
+		op[1] = {"Adolf Hitler\n", false,1}
+		op[2] = {"Abraham Lincoln\n", true, 1}
+		op[3] = {"George Washington\n", true, 1}
+		self.winString = "An admirable role model"
+		self.loseString = "A NAZI!"
+		self.winPaper = {"PRESIDENT EXPRESSES GENEOLOGICAL HOPE", "PEOPLE APPROVE OF DECISION"}
+		self.losePaper = {"PRESIDENT EXPRESSES HOPE OF BEING A HITLER", "PROTESTS STILL PENDING"}
+		
+	if thing = "food" then
+		self.question = "What is your favorite food?"
+		op[1] = {"Hamburger\n", true, 1}
+		op[2] = {"Pizza\n", true, 1}
+		op[3] = {"Whale\n", fale, 1}
+		self.winString = "An American Classic"
+		self.loseString = "The poor whales..."
+		self.winPaper = {"PRESIDENT HAS GOOD TASTES IN FOOD", "DRAMATIC LACK OF SURPRISE"}
+		self.losePaper = {"PRESIDENT EATS WHALES", "ANIMAL CONSERVATIONISTS HORRIFIED"}
+	
+	
 
 	local ugh = {false,false,false}
 	self.answer = {}
