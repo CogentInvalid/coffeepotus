@@ -4,7 +4,7 @@ function speech:init(parent)
 
 	self.parent = parent
 
-	local options = {"games", "jews", "colors", "allegations", "guns", "taxes", "geneology", "food"}
+	local options = {"games", "jews", "colors", "allegations", "guns", "taxes", "geneology", "food", "war"}
 	self:getThing(randomSelect(options))
 
 	self.state = "wait"
@@ -109,6 +109,16 @@ function speech:getThing(thing)
 		self.winPaper = {"PRESIDENT HAS GOOD TASTE IN FOOD", "FEW ARE SURPRISED"}
 		self.losePaper = {"PRESIDENT EATS WHALES", "ANIMAL CONSERVATIONISTS HORRIFIED"}
 	end
+	
+	if thing = "war" then
+		self.question = "How do you plan to wage the war on terror?"
+		op[1] = {"With carefully calculation\n", true, 1}
+		op[2] = {"With rapid strikes\n", true, 1}
+		op[3] = {"By deploying more trolls", false, 1}
+		self.winString = "A good plan"
+		self.loseString = "A strange plan..."
+		self.winPaper = {"PRESIDENT PLANS BOLD OFFENSIVES", "MORALE OF TROOPS INCREASES"}
+		self.losePaper = {"PRESIDENT REQUESTS FIRST-EVER TROLL DEPLOYMENT", "THE TROLLS HAVE NOT YET BEEN LOCATED"}
 	
 	
 	local ugh = {false,false,false}
