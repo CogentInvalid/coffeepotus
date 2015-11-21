@@ -8,19 +8,24 @@ function coffee:init()
 
 	self.clickables = {}
 
-	table.insert(self.clickables, self:newCup(100, 400))
+	self.bgPos = -178
+
+	self.clickables.cup = self:newCup(150, 400)
+	self.clickables.pot = self:newPot(20, 200)
 end
 
 function coffee:update(dt)
 	self.meter = self.meter - self.drainRate*dt
+	self.bgPos = self.bgPos + 100*dt
+	if self.bgPos > 0 then self.bgPos = -178 end
 end
 
 function coffee:draw()
 	love.graphics.setCanvas(self.canvas)
 	self.canvas:clear()
 	love.graphics.setColor(255, 255, 255)
-	love.graphics.draw(imgMan:getImage('coffee-bg'), 0, 0)
-	for i, v in ipairs(self.clickables) do
+	love.graphics.draw(imgMan:getImage('coffee-bg'), 0, self.bgPos)
+	for k, v in pairs(self.clickables) do
 		love.graphics.draw(v.sprite, v.x, v.y)
 	end
 	love.graphics.rectangle("fill",10,10,self.meter*400,100)
@@ -34,7 +39,7 @@ function coffee:keypressed(key)
 end
 
 function coffee:mousepressed(x, y, b)
-	for i, v in ipairs(self.clickables) do
+	for k, v in pairs(self.clickables) do
 		if x-500 > v.x and x-500 < v.x+v.w and y > v.y and y < v.y+v.h then
 			v.onClick()
 		end
@@ -65,4 +70,22 @@ function coffee:newCup(x, y)
 	end
 
 	return cup
+end
+
+function coffee:newPot(x, y)
+	local pot = self:newClickable(imgMan:getImage('coffee-pot-2'), x, y)
+	pot.cupsLeft = 2
+
+	function pot.onClick()
+		if pot.cupsLeft >= 1 then
+			if self.clickables.cup.sipsLeft < 3 then
+				self.clickables.cup.sipsLeft = 3
+				self.clickables.cup.sprite = imgMan:getImage('coffee-cup-3')
+				pot.cupsLeft = pot.cupsLeft - 1
+				pot.sprite = imgMan:getImage('coffee-pot-'..pot.cupsLeft)
+			end
+		end
+	end
+
+	return pot
 end
