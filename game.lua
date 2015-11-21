@@ -61,7 +61,7 @@ function game:draw()
 end
 
 function game:keypressed(key)
-
+	self.currentMinigame:keypressed(key)
 end
 
 function game:mousepressed(x, y, b)
