@@ -87,19 +87,22 @@ function paperwork:keypressed(key)
 		if x>self.successZone[1]+self.paper.x and y>self.paper.y+self.successZone[2]
 		and x<self.paper.x+self.successZone[3] and y<self.paper.y+self.successZone[4] then
 			self.state = "win"
-			self.finished = true
-			self.cursor = nil
+			self:finish()
 		else
 			--test fail zone
 			if x>self.failZone[1]+self.paper.x and y>self.paper.y+self.failZone[2]
 			and x<self.paper.x+self.failZone[3] and y<self.paper.y+self.failZone[4] then
 				self.state = "lose"
-				self.finished = true
-				self.cursor = nil
+				self:finish()
 			else
 				self.state = "miss"
 			end
 		end
 
 	end
+end
+
+function paperwork:finish()
+	self.finished = true
+	self.cursor = nil
 end

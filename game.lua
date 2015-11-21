@@ -19,9 +19,13 @@ function game:init()
 	self.minigames = {}
 	self.currentMinigame = paperwork:new(self)
 
-	self.wobble = 0.5
+	self.wobble = 1
 	self.timer = 10
-	self.endTimer = 2
+	self.endTimer = 0
+	self.paperTimer = 0
+
+	self.endPaper = {x=0, y=600}
+	self.news_hitler = imgMan:getImage("hitler")
 
 	self:start()
 end
@@ -44,19 +48,39 @@ function game:update(delta)
 		self.currentMinigame:update(dt)
 
 		if self.currentMinigame.finished then
-			self.timer = 0
+			if self.timer ~= 0 then
+				self.timer = 0
+				self.endTimer = 2
+			end
 		end
 
-		self.timer = self.timer - dt
-		if self.timer <= 0 then
-			self.endTimer = self.endTimer - dt
-			if self.endTimer <= 0 then
+		if self.timer > 0 then
+			self.timer = self.timer - dt
+			if self.timer <= 0 then
 				self.endTimer = 2
-				self.timer = 10
-				self.currentMinigame = paperwork:new(self)
 			end
 		end
 		if self.timer < 0 then self.timer = 0 end
+
+		if self.endTimer > 0 then
+			self.endTimer = self.endTimer - dt
+			if self.endTimer <= 0 then
+				self.endTimer = 0
+				self.paperTimer = 3
+			end
+		end
+
+		if self.paperTimer > 0 then
+			self.paperTimer = self.paperTimer - dt
+			if self.paperTimer <= 0 then
+				self.currentMinigame = paperwork:new(self)
+				self.timer = 10
+			end
+
+			self.endPaper.y = self.endPaper.y - (self.endPaper.y - 0)*10*dt
+		else
+			self.endPaper.y = self.endPaper.y - (self.endPaper.y - 600)*10*dt
+		end
 
 		accum = accum - 0.01
 	end
@@ -75,6 +99,8 @@ function game:draw()
 	love.graphics.rectangle("fill",10,10,(self.timer/10)*400,50)
 
 	love.graphics.setColor(255,255,255)
+	--end paper
+	love.graphics.draw(self.news_hitler, self.endPaper.x, self.endPaper.y)
 	love.graphics.setCanvas()
 	love.graphics.draw(self.canvas, 0, 0)
 
