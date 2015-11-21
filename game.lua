@@ -1,5 +1,6 @@
 require "paperwork"
 require "speech"
+require "handsandbabies"
 require "ent/gameObject"
 require "ent/cursor"
 
@@ -17,7 +18,7 @@ function game:init()
 	self.component = {}
 
 	--gameplay stuff
-	self.minigames = {paperwork, speech}
+	self.minigames = {paperwork, speech, handsAndBabies}
 	local randgame = randomSelect(self.minigames)
 	self.currentMinigame = randgame:new(self)
 

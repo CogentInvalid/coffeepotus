@@ -81,7 +81,7 @@ function coffee:newCup(x, y)
 	cup.destY = y
 
 	function cup.onClick()
-		if math.random() > 0.90 then
+		if math.random() > 0.95 then
 			cup.destY = 700
 			self.hasCup = false
 		elseif cup.sipsLeft >= 1 then
