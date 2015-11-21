@@ -36,7 +36,6 @@ function coffee:draw()
 	love.graphics.rectangle("fill",10,10,self.meter*400,100)
 	love.graphics.setCanvas()
 	love.graphics.draw(self.canvas, 500, 0)
-	debug(love.mouse.getX()..', '..love.mouse.getY())
 end
 
 function coffee:keypressed(key)

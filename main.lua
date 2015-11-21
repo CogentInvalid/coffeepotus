@@ -12,6 +12,9 @@ function love.load()
 	math.randomseed(os.time())
 
 	love.graphics.setBackgroundColor(0,0,0)
+	font = love.graphics.newFont(16)
+	love.graphics.setFont(font)
+	mono = love.graphics.newImageFont("img/c64.png", "@abcdefghijklmnopqrstuvwxyz[$]^^ !\"#$%&'()*+,-./0123456789:;<=>?_ABCDEFGHIJKLMNOPQRSTUVWXYZ+^^^^")
 
 	debugger = debugger:new()
 	imgMan = imgManager:new()
