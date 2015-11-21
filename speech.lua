@@ -4,7 +4,7 @@ function speech:init(parent)
 
 	self.parent = parent
 
-	local options = {"games", "jews"}
+	local options = {"games", "jews", "colors"}
 	self:getThing(randomSelect(options))
 
 	self.state = "wait"
@@ -33,6 +33,15 @@ function speech:getThing(thing)
 		op[3] = {"Hitler? I'm a hitler...", false, 2}
 		self.winString = "OK WHATEVER DUDE"
 		self.loseString = "WHAT! A HITLER!!!"
+	end
+
+	if thing == "colors" then
+		self.question = "Isn't it false that your favorite colors aren't red, white, and blue?"
+		op[1] = {"Yep!", false, 1}
+		op[2] = {"Yeah!!!1", false, 1}
+		op[3] = {"No way man!", true, 1}
+		self.winString = "A true American!"
+		self.loseString = "He must be a socialist!"
 	end
 
 	local ugh = {false,false,false}
