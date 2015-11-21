@@ -4,10 +4,12 @@ function speech:init(parent)
 
 	self.parent = parent
 
-	local options = {"games"}
+	local options = {"games", "jews", "colors"}
 	self:getThing(randomSelect(options))
 
 	self.state = "wait"
+
+	self.answerTimer = 1
 
 	self.finished = false
 
@@ -22,6 +24,24 @@ function speech:getThing(thing)
 		op[3] = {"Video games are the last\nlight in a dying world!", true, 2}
 		self.winString = "Acceptable!"
 		self.loseString = "Appalling!"
+	end
+
+	if thing == "jews" then
+		self.question = "PRESIDENT MAN WHAT YOU THINK OF HITLER?"
+		op[1] = {"I want to kiss all the\njews.", true, 2}
+		op[2] = {"What kind of question is\nthat? You're a terrible\njournalist.", true, 3}
+		op[3] = {"Hitler? I'm a hitler...", false, 2}
+		self.winString = "OK WHATEVER DUDE"
+		self.loseString = "WHAT! A HITLER!!!"
+	end
+
+	if thing == "colors" then
+		self.question = "Isn't it false that your favorite colors aren't red, white, and blue?"
+		op[1] = {"Nope!", false, 1}
+		op[2] = {"NO!!!1", false, 1}
+		op[3] = {"Yeah dude!", true, 1}
+		self.winString = "A true American!"
+		self.loseString = "He must be a socialist!"
 	end
 
 	local ugh = {false,false,false}
@@ -45,9 +65,13 @@ function speech:getThing(thing)
 	self.a2 = self.answer[2][1]
 	self.a3 = self.answer[3][1]
 
-	self.y1 = 250
+	self.y1 = 200
 	self.y2 = self.y1 + 16 + 16*self.answer[1][3]
 	self.y3 = self.y2 + 16 + 16*self.answer[2][3]
+
+	self.x1 = -480
+	self.x2 = -480
+	self.x3 = -480
 
 end
 
@@ -57,6 +81,13 @@ function speech:update(dt)
 		if math.random(3) == 1 then self.a1 = self:garble(self.answer[1][1], 0.2) end
 		if math.random(3) == 1 then self.a2 = self:garble(self.answer[2][1], 0.2) end
 		if math.random(3) == 1 then self.a3 = self:garble(self.answer[3][1], 0.2) end
+	end
+
+	self.answerTimer = self.answerTimer - dt
+	if self.answerTimer <= 0 then
+		self.x1 = self.x1 - (self.x1 - 20)*5*dt
+		self.x2 = self.x2 - (self.x2 - 20)*4*dt
+		self.x3 = self.x3 - (self.x3 - 20)*3*dt
 	end
 
 end
@@ -112,19 +143,19 @@ function speech:draw()
 	if self.choice == 1 then
 		if self.answer[1][2] then love.graphics.setColor(0,150,0) else love.graphics.setColor(255,0,0) end
 	end
-	love.graphics.print("1. " .. self.a1, 20, self.y1)
+	love.graphics.print("1. " .. self.a1, self.x1, self.y1)
 
 	love.graphics.setColor(0,0,0)
 	if self.choice == 2 then
 		if self.answer[2][2] then love.graphics.setColor(0,150,0) else love.graphics.setColor(255,0,0) end
 	end
-	love.graphics.print("2. " .. self.a2, 20, self.y2)
+	love.graphics.print("2. " .. self.a2, self.x2, self.y2)
 
 	love.graphics.setColor(0,0,0)
 	if self.choice == 3 then
 		if self.answer[3][2] then love.graphics.setColor(0,150,0) else love.graphics.setColor(255,0,0) end
 	end
-	love.graphics.print("3. " .. self.a3, 20, self.y3)
+	love.graphics.print("3. " .. self.a3, self.x3, self.y3)
 
 
 	love.graphics.setFont(font)
