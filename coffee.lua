@@ -83,7 +83,7 @@ function coffee:newCup(x, y)
 				self.clickables.pot = self:newPot(20, 200)
 				self.hasPot = true
 			end
-			sfx['president-drinking']:play()
+			sfx['gulp']:play()
 			self.meter = math.min(self.meter + 0.3, 1)
 			cup.sipsLeft = cup.sipsLeft - 1
 			cup.sprite = imgMan:getImage('coffee-cup-'..cup.sipsLeft)
@@ -107,7 +107,7 @@ function coffee:newPot(x, y)
 	function pot.onClick()
 		if pot.cupsLeft >= 1 then
 			if self.clickables.cup.sipsLeft < 3 then
-				sfx['coffee-pouring']:play()
+				sfx['pour']:play()
 				self.clickables.cup.sipsLeft = 3
 				self.clickables.cup.sprite = imgMan:getImage('coffee-cup-3')
 				pot.cupsLeft = pot.cupsLeft - 1
