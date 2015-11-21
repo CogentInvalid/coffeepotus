@@ -39,7 +39,7 @@ end
 
 function paperwork:update(dt)
 
-	if self.cursor ~= nil then
+	if self.cursor ~= nil and not self.finished then
 		self.cursor.wobble = self.parent.wobble
 		self.cursor:update(dt)
 	end
@@ -104,5 +104,4 @@ end
 
 function paperwork:finish()
 	self.finished = true
-	self.cursor = nil
 end

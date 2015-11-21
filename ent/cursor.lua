@@ -9,8 +9,8 @@ function cursor:init(args)
 	self.wobble = 1
 
 	--phys component
-	self.phys = self:addComponent(physics:new(self, args.x, args.y, 20, 20))
-	self.img = self:addComponent(image:new("player"))
+	self.phys = self:addComponent(physics:new(self, args.x, args.y, 36, 40))
+	self.img = self:addComponent(image:new("check"))
 end
 
 function cursor:update(dt)
@@ -37,7 +37,10 @@ function cursor:update(dt)
 end
 
 function cursor:draw()
-	self.img:draw(self.phys.x, self.phys.y, 20/50, 20/50)
+	love.graphics.setColor(255,255,255)
+	self.img:draw(self.phys.x, self.phys.y, 30/50, 30/50)
+	--love.graphics.setColor(255,0,0,100)
+	--love.graphics.rectangle("fill", self.phys.x, self.phys.y, self.phys.w, self.phys.h)
 end
 
 function cursor:resolveCollision(entity, dir)
