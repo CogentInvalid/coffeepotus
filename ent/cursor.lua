@@ -6,6 +6,8 @@ function cursor:init(args)
 
 	self.id = "cursor"
 
+	self.wobble = 1
+
 	--phys component
 	self.phys = self:addComponent(physics:new(self, args.x, args.y, 20, 20))
 	self.img = self:addComponent(image:new("player"))
@@ -27,7 +29,7 @@ function cursor:update(dt)
 
 	self.phys:addVel(xMove, yMove)
 
-	self.phys:addVel(math.random()*5000*randSign()*dt,math.random()*5000*randSign()*dt)
+	self.phys:addVel(math.random()*self.wobble*5000*randSign()*dt,math.random()*self.wobble*5000*randSign()*dt)
 
 	--friction
 	self.phys:addVel(-self.phys.vx*3*dt, -self.phys.vy*3*dt, 0)

@@ -17,8 +17,9 @@ function game:init()
 
 	--gameplay stuff
 	self.minigames = {}
-	self.currentMinigame = paperwork:new()
+	self.currentMinigame = paperwork:new(self)
 
+	self.wobble = 0.5
 	self.timer = 10
 	self.endTimer = 2
 
@@ -52,9 +53,10 @@ function game:update(delta)
 			if self.endTimer <= 0 then
 				self.endTimer = 2
 				self.timer = 10
-				self.currentMinigame = paperwork:new()
+				self.currentMinigame = paperwork:new(self)
 			end
 		end
+		if self.timer < 0 then self.timer = 0 end
 
 		accum = accum - 0.01
 	end

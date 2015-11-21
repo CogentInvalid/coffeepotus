@@ -7,6 +7,7 @@ function inputManager:init()
 	self.bind["down"] = {"s", "down"}
 	self.bind["left"] = {"a", "left"}
 	self.bind["right"] = {"d", "right"}
+	self.bind["interact"] = {"z", " "}
 
 	self.movDir = {x=0, y=0}
 	self.x = 0; self.y = 0
@@ -34,4 +35,10 @@ function inputManager:update(dt)
 
 	self.x = self.movDir.x; self.y = self.movDir.y
 
+end
+
+function inputManager:keyIs(bind, key)
+	for i,k in ipairs(self.bind[bind]) do
+		if k == key then return true end
+	end
 end
