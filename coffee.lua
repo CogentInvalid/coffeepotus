@@ -10,14 +10,19 @@ function coffee:init()
 
 	self.bgPos = -178
 
+	self.hasPot = false
+
 	self.clickables.cup = self:newCup(150, 400)
-	self.clickables.pot = self:newPot(20, 200)
 end
 
 function coffee:update(dt)
 	self.meter = self.meter - self.drainRate*dt
 	self.bgPos = self.bgPos + 100*dt
 	if self.bgPos > 0 then self.bgPos = -178 end
+
+	for k, v in pairs(self.clickables) do
+		v.update(dt)
+	end
 end
 
 function coffee:draw()
@@ -26,7 +31,7 @@ function coffee:draw()
 	love.graphics.setColor(255, 255, 255)
 	love.graphics.draw(imgMan:getImage('coffee-bg'), 0, self.bgPos)
 	for k, v in pairs(self.clickables) do
-		love.graphics.draw(v.sprite, v.x, v.y)
+		v.draw()
 	end
 	love.graphics.rectangle("fill",10,10,self.meter*400,100)
 	love.graphics.setCanvas()
@@ -54,6 +59,14 @@ function coffee:newClickable(sprite, x, y)
 	clickable.sprite = sprite
 	clickable.w, clickable.h = sprite:getDimensions()
 
+	function clickable.update(dt)
+
+	end
+
+	function clickable.draw()
+		love.graphics.draw(clickable.sprite, clickable.x, clickable.y)
+	end
+
 	return clickable
 end
 
@@ -63,6 +76,10 @@ function coffee:newCup(x, y)
 
 	function cup.onClick()
 		if cup.sipsLeft >= 1 then
+			if cup.sipsLeft == 1 and not self.hasPot then
+				self.clickables.pot = self:newPot(20, 200)
+				self.hasPot = true
+			end
 			self.meter = math.min(self.meter + 0.3, 1)
 			cup.sipsLeft = cup.sipsLeft - 1
 			cup.sprite = imgMan:getImage('coffee-cup-'..cup.sipsLeft)
@@ -73,8 +90,10 @@ function coffee:newCup(x, y)
 end
 
 function coffee:newPot(x, y)
-	local pot = self:newClickable(imgMan:getImage('coffee-pot-2'), x, y)
+	local pot = self:newClickable(imgMan:getImage('coffee-pot-2'), 600, 200)
 	pot.cupsLeft = 2
+	pot.destX = x
+	pot.destY = y
 
 	function pot.onClick()
 		if pot.cupsLeft >= 1 then
@@ -87,5 +106,13 @@ function coffee:newPot(x, y)
 		end
 	end
 
+	function pot.update(dt)
+		pot.x = pot.x - (pot.x - pot.destX)*4*dt
+	end
+
 	return pot
 end
+
+-- function coffee:newMaker(x, y)
+-- 	local maker = self:newClickable(imgMan:getImage('coffee-maker'), x, y)
+-- 	maker.status = 'fixed'
