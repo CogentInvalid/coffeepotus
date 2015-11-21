@@ -6,7 +6,7 @@ function paperwork:init(parent)
 
 	self.cursor = cursor:new({x=200,y=300})
 
-	local options = {"peas", "budget", "peas-reverse"}
+	local options = {"peas", "budget", "peas-reverse", "candy"}
 	self.papx = math.random(50,150); self.papy = math.random(100,200) --target paper position
 	self:getThing(randomSelect(options))
 
@@ -40,6 +40,12 @@ function paperwork:getThing(thing)
 		self.winString = "BUDGET PASSED"
 		self.loseString = "BUDGET UNPASSED"
 	end
+	if thing == "candy" then
+		self.successZone = {25,17,54,50}
+		self.failZone = {25,153,236,195}
+		self.winString = "CANDY SAVED"
+		self.loseString = "DREAMS CRUSHED"
+	end
 
 end
 
@@ -50,12 +56,18 @@ function paperwork:update(dt)
 		self.cursor:update(dt)
 	end
 
+	--debug(love.mouse.getX()-self.paper.x..', '..love.mouse.getY()-self.paper.y)
+
 	self.paper.x = self.paper.x - (self.paper.x - self.papx)*5*dt
 	self.paper.y = self.paper.y - (self.paper.y - self.papy)*5*dt
 
 end
 
 function paperwork:draw()
+
+	love.graphics.setColor(50,35,0)
+	love.graphics.rectangle("fill", 0, 0, 500, 600)
+
 	love.graphics.setColor(255,255,255)
 	love.graphics.draw(self.paper.img, self.paper.x, self.paper.y, 0, 30/50, 30/50)
 
