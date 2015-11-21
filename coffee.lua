@@ -11,6 +11,7 @@ function coffee:init()
 	self.bgPos = -178
 
 	self.hasPot = false
+	self.hasMaker = false
 
 	self.clickables.cup = self:newCup(150, 400)
 end
@@ -92,7 +93,9 @@ function coffee:newCup(x, y)
 
 	function cup.update(dt)
 		cup.x = cup.x - (cup.x - cup.destX)*4*dt
-		cup.y = cup.y + (cup.destY - cup.y)*4*dt
+		if cup.y < cup.destY then
+			cup.y = cup.y + 100*dt
+		end
 	end
 
 	return cup

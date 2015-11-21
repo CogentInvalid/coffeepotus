@@ -21,6 +21,8 @@ function paperwork:getThing(thing)
 	local xpos = math.random(0,200)
 	local ypos = 600
 
+	sfx['paper']:play()
+
 	self.paper = {img=imgMan:getImage(thing), x=xpos, y=ypos}
 	if thing == "peas" then
 		self.successZone = {85,227,129,274}
