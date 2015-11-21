@@ -1,6 +1,8 @@
 paperwork = class:new()
 
-function paperwork:init()
+function paperwork:init(parent)
+
+	self.parent = parent
 
 	self.cursor = cursor:new({x=200,y=300})
 
@@ -38,12 +40,12 @@ end
 function paperwork:update(dt)
 
 	if self.cursor ~= nil then
+		self.cursor.wobble = self.parent.wobble
 		self.cursor:update(dt)
 	end
 
 	self.paper.x = self.paper.x - (self.paper.x - self.papx)*5*dt
 	self.paper.y = self.paper.y - (self.paper.y - self.papy)*5*dt
-	--debug(love.mouse.getX()-self.paper.x .. ", " .. love.mouse.getY()-self.paper.y)
 
 end
 
@@ -77,7 +79,7 @@ function paperwork:draw()
 end
 
 function paperwork:keypressed(key)
-	if key == "z" and not self.finished then
+	if input:keyIs("interact", key) and not self.finished then
 		local phys = self.cursor.phys
 		local x = phys.x+phys.w/2; local y = phys.y+phys.h/2
 
