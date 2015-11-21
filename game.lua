@@ -122,7 +122,7 @@ function game:draw()
 	love.graphics.setFont(bigfont)
 	love.graphics.printf(self.headline, self.endPaper.x+50, self.endPaper.y+80, 400)
 	love.graphics.setFont(font)
-	love.graphics.printf(self.subtitle, self.endPaper.x+50, self.endPaper.y+180, 400)
+	love.graphics.printf(self.subtitle, self.endPaper.x+50, self.endPaper.y+190, 400)
 
 end
 
