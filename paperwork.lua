@@ -6,8 +6,7 @@ function paperwork:init(parent)
 
 	self.cursor = cursor:new({x=200,y=300})
 
-	--local options = {"peas", "budget", "peas-reverse", "candy", "peas-quad"}
-	local options = {"nuke"}
+	local options = {"peas", "budget", "peas-reverse", "candy", "peas-quad", "nuke"}
 	self.papx = math.random(50,150); self.papy = math.random(100,200) --target paper position
 	self:getThing(randomSelect(options))
 
