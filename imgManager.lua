@@ -32,23 +32,23 @@ function imgManager:init(parent)
 			number x2 = pixel_coords[0];
 			number y2 = pixel_coords[1];
 			number dist = sqrt((x-x2)*(x-x2)+((y-y2)*(y-y2))/amt);
-			if(dist > 300)
+			if(dist > 400)
 			{
-				r = r*pow(amt,1.4);
-				g = g*pow(amt,1.4);
-				b = b*pow(amt,1.4);
+				r = r*pow(amt,1);
+				g = g*pow(amt,1);
+				b = b*pow(amt,1);
 			}
-			if(dist > 150)
+			if(dist > 200)
 			{
-				r = r*amt;
-				g = g*amt;
-				b = b*amt;
+				r = r*pow(amt,0.6);
+				g = g*pow(amt,0.6);
+				b = b*pow(amt,0.6);
 			}
-			if(dist < 150)
+			if(dist < 200)
 			{
-				r = r*pow(amt,0.5);
-				g = g*pow(amt,0.5);
-				b = b*pow(amt,0.5);
+				r = r*pow(amt,0.3);
+				g = g*pow(amt,0.3);
+				b = b*pow(amt,0.3);
 			}
             return vec4(r, g, b, a);
         }
