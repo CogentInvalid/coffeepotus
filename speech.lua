@@ -4,8 +4,7 @@ function speech:init(parent)
 
 	self.parent = parent
 
-	--local options = {"games", "jews", "colors", "allegations", "guns", "taxes", "geneology", "food", "war", "policy"}
-	local options = {"guy"}
+	local options = {"games", "jews", "colors", "allegations", "guns", "taxes", "geneology", "food", "war", "policy", "guy"}
 	self:getThing(randomSelect(options))
 
 	self.state = "wait"
