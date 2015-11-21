@@ -39,7 +39,9 @@ function game:update(delta)
 			if comp.update ~= nil then comp:update(dt) end
 		end
 
-		self.currentMinigame:update(dt)
+		if not self.currentMinigame.finished then
+			self.currentMinigame:update(dt)
+		end
 
 		self.timer = self.timer - dt
 		if self.timer <= 0 then
