@@ -13,6 +13,9 @@ function coffee:init()
 	self.hasPot = false
 	self.hasMaker = false
 
+	self.filling = false
+	self.fillTimer = 0
+
 	self.clickables.cup = self:newCup(150, 400)
 end
 
@@ -131,6 +134,10 @@ function coffee:newPot(x, y)
 				pot.sprite = imgMan:getImage('coffee-pot-'..pot.cupsLeft)
 			end
 		end
+		if pot.cupsLeft == 0 and not self.hasMaker then
+			self.clickables.maker = self:newMaker(200, 100)
+			self.hasMaker = true
+		end
 	end
 
 	function pot.update(dt)
@@ -138,4 +145,38 @@ function coffee:newPot(x, y)
 	end
 
 	return pot
+end
+
+function coffee:newMaker(x, y)
+	local maker = self:newClickable(imgMan:getImage('coffee-maker'), 900, 100)
+	maker.fixed = true
+	maker.destX = x
+	maker.destY = y
+
+	function maker.onClick()
+		if self.clickables.pot.cupsLeft < 2 then
+			self.clickables.pot.destX = maker.x + 75
+			self.filling = true
+			self.fillTimer = 0
+		end
+	end
+
+	function maker.update(dt)
+		maker.x = maker.x - (maker.x - maker.destX)*4*dt
+
+		if self.filling then
+			self.fillTimer = self.fillTimer + dt
+			if self.fillTimer > 2 then
+				self.clickables.pot.cupsLeft = self.clickables.pot.cupsLeft + 1
+				self.clickables.pot.sprite = imgMan:getImage('coffee-pot-'..self.clickables.pot.cupsLeft)
+				self.fillTimer = 0
+			end
+			if self.clickables.pot.cupsLeft >= 2 then
+				self.clickables.pot.destX = 20
+				self.filling = false
+			end
+		end
+	end
+
+	return maker
 end
