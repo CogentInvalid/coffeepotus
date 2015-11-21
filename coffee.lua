@@ -71,11 +71,15 @@ function coffee:newClickable(sprite, x, y)
 end
 
 function coffee:newCup(x, y)
-	local cup = self:newClickable(imgMan:getImage('coffee-cup-3'), x, y)
+	local cup = self:newClickable(imgMan:getImage('coffee-cup-3'), 600, 400)
 	cup.sipsLeft = 3
+	cup.destX = x
+	cup.destY = y
 
 	function cup.onClick()
-		if cup.sipsLeft >= 1 then
+		if math.random() > 0.95 then
+			cup.destY = 700
+		elseif cup.sipsLeft >= 1 then
 			if cup.sipsLeft == 1 and not self.hasPot then
 				self.clickables.pot = self:newPot(20, 200)
 				self.hasPot = true
@@ -84,6 +88,11 @@ function coffee:newCup(x, y)
 			cup.sipsLeft = cup.sipsLeft - 1
 			cup.sprite = imgMan:getImage('coffee-cup-'..cup.sipsLeft)
 		end
+	end
+
+	function cup.update(dt)
+		cup.x = cup.x - (cup.x - cup.destX)*4*dt
+		cup.y = cup.y + (cup.destY - cup.y)*4*dt
 	end
 
 	return cup
@@ -112,7 +121,3 @@ function coffee:newPot(x, y)
 
 	return pot
 end
-
--- function coffee:newMaker(x, y)
--- 	local maker = self:newClickable(imgMan:getImage('coffee-maker'), x, y)
--- 	maker.status = 'fixed'
