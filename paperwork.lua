@@ -104,12 +104,14 @@ function paperwork:keypressed(key)
 		--test success zone
 		if x>self.successZone[1]+self.paper.x and y>self.paper.y+self.successZone[2]
 		and x<self.paper.x+self.successZone[3] and y<self.paper.y+self.successZone[4] then
+			sfx['stamp']:play()
 			self.state = "win"
 			self:finish()
 		else
 			--test fail zone
 			if x>self.failZone[1]+self.paper.x and y>self.paper.y+self.failZone[2]
 			and x<self.paper.x+self.failZone[3] and y<self.paper.y+self.failZone[4] then
+				sfx['stamp']:play()
 				self.state = "lose"
 				self:finish()
 			else

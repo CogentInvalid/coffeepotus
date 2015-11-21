@@ -165,6 +165,8 @@ function speech:keypressed(key)
 
 	if not self.finished then
 		if key=="1" or key=="2" or key=="3" then
+			local fx = math.random(3)
+			sfx['speaking-'..fx]:play()
 			self.choice = tonumber(key)
 			if self.answer[self.choice][2] then
 				self.state = "win"
