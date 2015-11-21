@@ -6,6 +6,7 @@ function paperwork:init()
 
 	local options = {"peas", "budget"}
 	self:getThing(randomSelect(options))
+	self.papx = 100; self.papy = 100
 	--self.paper = {img=imgMan:getImage("peas"), x=100, y=200}
 	--self.successZone = {85,227,129,274}
 	--self.failZone = {141,227,178,269}
@@ -17,13 +18,13 @@ end
 function paperwork:getThing(thing)
 
 	if thing == "peas" then
-		self.paper = {img=imgMan:getImage("peas"), x=100, y=200}
+		self.paper = {img=imgMan:getImage("peas"), x=100, y=600}
 		self.successZone = {85,227,129,274}
 		self.failZone = {141,227,178,269}
 	end
 
 	if thing == "budget" then
-		self.paper = {img=imgMan:getImage("budget"), x=100, y=200}
+		self.paper = {img=imgMan:getImage("budget"), x=100, y=600}
 		self.successZone = {118,147,158,196}
 		self.failZone = {55,131,224,194}
 	end
@@ -34,6 +35,7 @@ function paperwork:update(dt)
 
 	self.cursor:update(dt)
 
+	self.paper.y = self.paper.y - (self.paper.y - self.papy)*5*dt
 	debug(love.mouse.getX()-self.paper.x .. ", " .. love.mouse.getY()-self.paper.y)
 
 end
@@ -44,15 +46,15 @@ function paperwork:draw()
 
 	if self.state == "win" then
 		love.graphics.setColor(0,255,0)
-		love.graphics.print("YA DID IT SON", self.paper.x+100, self.paper.y+150)
+		love.graphics.print("YA DID IT SON", self.paper.x+100, self.paper.y+400)
 	end
 	if self.state == "lose" then
 		love.graphics.setColor(255,0,0)
-		love.graphics.print("YA DONE GOOFED SON", self.paper.x+100, self.paper.y+150)
+		love.graphics.print("YA DONE GOOFED SON", self.paper.x+100, self.paper.y+400)
 	end
 	if self.state == "miss" then
 		love.graphics.setColor(255,255,0)
-		love.graphics.print("YA GOTTA TRY AGAIN SON", self.paper.x+100, self.paper.y+150)
+		love.graphics.print("YA GOTTA TRY AGAIN SON", self.paper.x+100, self.paper.y+400)
 	end
 
 	self.cursor:draw()
