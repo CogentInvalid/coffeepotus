@@ -69,6 +69,11 @@ function game:update(delta)
 		if self.endTimer > 0 then
 			self.endTimer = self.endTimer - dt
 			if self.endTimer <= 0 then
+				if self.currentMinigame.state == 'win' then
+					sfx['yay']:play()
+				else
+					sfx['boo']:play()
+				end
 				self.endTimer = 0
 				self.paperTimer = 3
 				--set paper
