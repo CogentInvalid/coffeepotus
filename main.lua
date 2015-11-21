@@ -17,9 +17,6 @@ function love.load()
 	imgMan = imgManager:new()
 	input = inputManager:new()
 
-	--gameMode = game:new()
-	--currentMode = gameMode
-
 	gameScreen = game:new()
 	coffeeScreen = coffee:new()
 
