@@ -3,6 +3,7 @@ require "libs/misc"
 require "libs/angle"
 require "imgManager"
 require "inputManager"
+require "audioManager"
 require "debugger"
 require "game"
 require "coffee"
@@ -19,6 +20,7 @@ function love.load()
 	debugger = debugger:new()
 	imgMan = imgManager:new()
 	input = inputManager:new()
+	audio = audioManager:new()
 
 	gameScreen = game:new()
 	coffeeScreen = coffee:new()

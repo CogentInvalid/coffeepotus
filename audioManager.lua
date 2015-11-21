@@ -3,17 +3,19 @@ audioManager = class:new()
 function audioManager:init()
 	--load all sounds from /resources
 
-	local soundFiles = love.filesystem.getDirectoryItems("resources/audio/")
+	local soundFiles = love.filesystem.getDirectoryItems("audio/")
 
 	sfx = {} --load sfx
 	for i,name in ipairs(soundFiles) do
 		if string.find(name, ".ogg") then
 			name = string.gsub(name, ".ogg", "")
-			sfx[name] = love.audio.newSource("/resources/audio/" .. name .. ".ogg", "stream")
+			sfx[name] = love.audio.newSource("audio/" .. name .. ".ogg", "stream")
 		end
 	end
 
-	currentTrack = sfx['thirdlevel']
+	currentTrack = sfx['bg-music']
+	currentTrack:play()
+	currentTrack:setVolume(0.2)
 end
 
 function audioManager:update(dt)
