@@ -84,7 +84,7 @@ function paperwork:draw()
 	love.graphics.draw(self.paper.img, self.paper.x, self.paper.y, 0, 30/50, 30/50)
 
 	local r = 255; local g = 255; local b = 255
-	local x = 200; local y = 500
+	local x = 100; local y = 550
 	local str = ""
 
 	if self.state == "win" then
@@ -95,13 +95,13 @@ function paperwork:draw()
 		r=255; g=0; b=0
 		str = self.loseString
 	end
-	if self.state == "miss" then
-		r=255; g=255; b=0
-		str = "YA GOTTA TRY AGAIN SON"
-	end
+--	if self.state == "miss" then
+--		r=255; g=255; b=0
+--		str = "YA GOTTA TRY AGAIN SON"
+--	end
 
 	love.graphics.setColor(r,g,b)
-	love.graphics.print(str, x, y)
+	love.graphics.printf(str, x, y, 300, "center")
 	if self.cursor ~= nil then self.cursor:draw() end
 
 	love.graphics.setColor(255,0,0)

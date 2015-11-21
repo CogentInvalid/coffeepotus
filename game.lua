@@ -46,6 +46,10 @@ function game:update(delta)
 	if accum > 0.05 then accum = 0.05 end
 	while accum >= delta do
 
+		effect:send("x", 250)
+		effect:send("y", 300)
+		effect:send("amt", coffeeScreen.meter)
+
 		--update components
 		for i,comp in ipairs(self.component) do
 			if comp.update ~= nil then comp:update(dt) end
@@ -107,6 +111,9 @@ function game:draw()
 
 	love.graphics.setCanvas(self.canvas)
 	self.canvas:clear()
+
+	love.graphics.setShader(effect)
+
 	self.currentMinigame:draw()
 
 	--timer
@@ -132,6 +139,8 @@ function game:draw()
 	else
 		love.graphics.draw(self.sadface, self.endPaper.x+50, self.endPaper.y+250)
 	end
+
+	love.graphics.setShader()
 
 end
 
