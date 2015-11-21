@@ -37,9 +37,9 @@ function speech:getThing(thing)
 
 	if thing == "colors" then
 		self.question = "Isn't it false that your favorite colors aren't red, white, and blue?"
-		op[1] = {"Yep!", false, 1}
-		op[2] = {"Yeah!!!1", false, 1}
-		op[3] = {"No way man!", true, 1}
+		op[1] = {"Nope!", false, 1}
+		op[2] = {"NO!!!1", false, 1}
+		op[3] = {"Yeah dude!", true, 1}
 		self.winString = "A true American!"
 		self.loseString = "He must be a socialist!"
 	end
