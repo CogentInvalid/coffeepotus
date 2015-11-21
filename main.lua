@@ -26,14 +26,31 @@ function love.load()
 	gameScreen = game:new()
 	coffeeScreen = coffee:new()
 
+	tut = {}
+	tut[1] = {y=600,img=imgMan:getImage("tut1")}
+	tut[2] = {y=600,img=imgMan:getImage("tut2")}
+	tut[3] = {y=600,img=imgMan:getImage("tut3")}
+	spaceprompt = imgMan:getImage("spaceprompt")
+	promptx = 400
+	sfx['paper']:play()
+	currentTut = 1
+	gameStarted = false
+
 end
 
 function love.update(dt)
 
 	input:update(dt)
 
-	gameScreen:update(dt)
-	coffeeScreen:update(dt)
+	if not gameStarted then
+		for i=1, currentTut do
+			tut[i].y = tut[i].y - (tut[i].y-0)*5*dt
+			promptx = promptx - (promptx - (50+350*currentTut))*3*dt
+		end
+	else
+		gameScreen:update(dt)
+		coffeeScreen:update(dt)
+	end
 
 	debugger:update(dt)
 
@@ -44,14 +61,29 @@ function love.draw()
 	gameScreen:draw(dt)
 	coffeeScreen:draw(dt)
 
+	if not gameStarted then
+		love.graphics.setColor(50,35,0)
+		love.graphics.rectangle("fill", 0, 0, 1000, 600)
+		love.graphics.setColor(255,255,255)
+		for i=1, 3 do
+			love.graphics.draw(tut[i].img, 0, tut[i].y)
+		end
+		love.graphics.draw(spaceprompt, promptx, 250)
+	end
+
 	debugger:draw()
 
 end
 
 function love.keypressed(key)
 
-	gameScreen:keypressed(key)
-	coffeeScreen:keypressed(key)
+	if not gameStarted then
+		if key == " " then currentTut = currentTut + 1; sfx['paper']:play() end
+		if currentTut == 4 then gameStarted = true end
+	else
+		gameScreen:keypressed(key)
+		coffeeScreen:keypressed(key)
+	end
 
 	--if key == "1" then currentMode = gameMode end
 
