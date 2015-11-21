@@ -14,6 +14,7 @@ function love.load()
 
 	love.graphics.setBackgroundColor(0,0,0)
 	font = love.graphics.newFont(16)
+	bigfont = love.graphics.newFont(40)
 	love.graphics.setFont(font)
 	mono = love.graphics.newImageFont("img/c64.png", "@abcdefghijklmnopqrstuvwxyz[$]^^ !\"#$%&'()*+,-./0123456789:;<=>?_ABCDEFGHIJKLMNOPQRSTUVWXYZ+^^^^")
 

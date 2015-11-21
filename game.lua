@@ -27,7 +27,9 @@ function game:init()
 	self.paperTimer = 0
 
 	self.endPaper = {x=0, y=600}
-	self.news_hitler = imgMan:getImage("hitler")
+	self.news = imgMan:getImage("newspaper")
+	self.headline = "???"
+	self.subtitle = "..."
 
 	self:start()
 end
@@ -69,6 +71,9 @@ function game:update(delta)
 			if self.endTimer <= 0 then
 				self.endTimer = 0
 				self.paperTimer = 3
+				--set paper
+				self.headline = self.currentMinigame.headline
+				self.subtitle = self.currentMinigame.subtitle
 			end
 		end
 
@@ -103,9 +108,16 @@ function game:draw()
 
 	love.graphics.setColor(255,255,255)
 	--end paper
-	love.graphics.draw(self.news_hitler, self.endPaper.x, self.endPaper.y)
+	love.graphics.draw(self.news, self.endPaper.x, self.endPaper.y)
 	love.graphics.setCanvas()
 	love.graphics.draw(self.canvas, 0, 0)
+
+	--text
+	love.graphics.setColor(89,89,89)
+	love.graphics.setFont(bigfont)
+	love.graphics.printf(self.headline, self.endPaper.x+50, self.endPaper.y+80, 400)
+	love.graphics.setFont(font)
+	love.graphics.printf(self.subtitle, self.endPaper.x+50, self.endPaper.y+180, 400)
 
 end
 

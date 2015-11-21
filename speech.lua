@@ -12,6 +12,8 @@ function speech:init(parent)
 	self.answerTimer = 1
 
 	self.finished = false
+	self.headline = "NO HEADLINE SET"
+	self.subtitle = "NO SUBTITLE SET"
 
 end
 
@@ -24,6 +26,8 @@ function speech:getThing(thing)
 		op[3] = {"Video games are the last\nlight in a dying world!", true, 2}
 		self.winString = "Acceptable!"
 		self.loseString = "Appalling!"
+		self.winPaper = {"PRESIDENT ENDORSES VIDEOGAMES", "GOOD JUDGMENT LAUDED BY ALL"}
+		self.losePaper = {"PRESIDENT HATES VIDEOGAMES", "IGNORES THE HIDDEN VALUE OF THE MEDIUM"}
 	end
 
 	if thing == "jews" then
@@ -33,6 +37,8 @@ function speech:getThing(thing)
 		op[3] = {"Hitler? I'm a hitler...", false, 2}
 		self.winString = "OK WHATEVER DUDE"
 		self.loseString = "WHAT! A HITLER!!!"
+		self.winPaper = {"PRES NOT HITLER", "THIS SURPRISES NO ONE"}
+		self.losePaper = {"PRESIDENT LITERALLY HITLER", "NATION MOURNS"}
 	end
 
 	if thing == "colors" then
@@ -42,6 +48,8 @@ function speech:getThing(thing)
 		op[3] = {"Yeah dude!", true, 1}
 		self.winString = "A true American!"
 		self.loseString = "He must be a socialist!"
+		self.winPaper = {"GOD BLESS AMERICA", "EAGLE TEARS RAIN OVER WHITE HOUSE"}
+		self.losePaper = {"PRES CONFIRMED COMMUNIST", "COULD NOT BE REACHED FOR COMMENT"}
 	end
 
 	local ugh = {false,false,false}
@@ -170,8 +178,12 @@ function speech:keypressed(key)
 			self.choice = tonumber(key)
 			if self.answer[self.choice][2] then
 				self.state = "win"
+				self.headline = self.winPaper[1]
+				self.subtitle = self.winPaper[2]
 			else
 				self.state = "lose"
+				self.headline = self.losePaper[1]
+				self.subtitle = self.losePaper[2]
 			end
 			self:finish()
 		end
