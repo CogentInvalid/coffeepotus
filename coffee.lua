@@ -4,7 +4,6 @@ function coffee:init()
 	self.canvas = love.graphics.newCanvas(500,600)
 	self.meter = 1
 	self.drainRate = 0.04
-	self.sipsLeft = 3
 
 	self.clickables = {}
 
@@ -15,7 +14,8 @@ function coffee:init()
 	self.hasMaker = false
 
 	self.filling = false
-	self.fillTimer = 0
+	self.fixed = true
+	self.fixing = false
 
 	self.clickables.cup = self:newCup(150, 400)
 end
@@ -131,7 +131,7 @@ function coffee:newPot(x, y)
 	pot.destY = y
 
 	function pot.onClick()
-		if pot.cupsLeft >= 1 and self.hasCup then
+		if pot.cupsLeft >= 1 and self.hasCup and not self.filling then
 			if self.clickables.cup.sipsLeft < 3 then
 				sfx['pour']:play()
 				self.clickables.cup.sipsLeft = 3
@@ -148,6 +148,17 @@ function coffee:newPot(x, y)
 
 	function pot.update(dt)
 		pot.x = pot.x - (pot.x - pot.destX)*4*dt
+		pot.y = pot.y - (pot.y - pot.destY)*4*dt
+
+		if pot.y < -400 then
+			sfx['shatter']:play()
+			pot.y = 200
+			pot.x = 999999999
+			pot.destY = 200
+			pot.destX = 20
+			pot.cupsLeft = 0
+			pot.sprite = imgMan:getImage('coffee-pot-'..pot.cupsLeft)
+		end
 	end
 
 	return pot
@@ -155,17 +166,18 @@ end
 
 function coffee:newMaker(x, y)
 	local maker = self:newClickable(imgMan:getImage('coffee-maker'), 900, 100)
-	maker.fixed = true
+	self.clickables.fixer = self:newFixer()
 	maker.destX = x
 	maker.destY = y
+	maker.fillTimer = 0
 
 	function maker.onClick()
-		if self.clickables.pot.cupsLeft < 2 then
+		if self.clickables.pot.cupsLeft < 1 and not self.filling and self.clickables.pot.x < maker.x and not self:overFixer() then
 			self.clickables.pot.destX = maker.x + 75
 			self.filling = true
 			sfx['maker']:play()
 			sfx['maker']:setLooping(true)
-			self.fillTimer = 0
+			maker.fillTimer = 0
 		end
 	end
 
@@ -173,11 +185,18 @@ function coffee:newMaker(x, y)
 		maker.x = maker.x - (maker.x - maker.destX)*4*dt
 
 		if self.filling then
-			self.fillTimer = self.fillTimer + dt
-			if self.fillTimer > 2 then
-				self.clickables.pot.cupsLeft = self.clickables.pot.cupsLeft + 1
-				self.clickables.pot.sprite = imgMan:getImage('coffee-pot-'..self.clickables.pot.cupsLeft)
-				self.fillTimer = 0
+			maker.fillTimer = maker.fillTimer + dt
+			if maker.fillTimer > 2 then
+				if not self.fixed then
+					self.clickables.pot.destY = -500
+					self.filling = false
+					sfx['boing']:play()
+					sfx['maker']:stop()
+				else
+					self.clickables.pot.cupsLeft = self.clickables.pot.cupsLeft + 1
+					self.clickables.pot.sprite = imgMan:getImage('coffee-pot-'..self.clickables.pot.cupsLeft)
+					maker.fillTimer = 0
+				end
 			end
 			if self.clickables.pot.cupsLeft >= 2 then
 				self.clickables.pot.destX = 20
@@ -188,4 +207,48 @@ function coffee:newMaker(x, y)
 	end
 
 	return maker
+end
+
+function coffee:overFixer()
+	return love.mouse.getX()-500 > self.clickables.fixer.x and 
+	love.mouse.getX()-500 < self.clickables.fixer.x+self.clickables.fixer.w and 
+	love.mouse.getY() > self.clickables.fixer.y and 
+	love.mouse.getY() < self.clickables.fixer.y+self.clickables.fixer.h
+end
+
+function coffee:newFixer()
+	local fixer = self:newClickable(imgMan:getImage('maker-fixer'), 500, 0)
+
+	fixer.lights = imgMan:getImage('maker-status-fixed')
+
+	fixer.timer = 0
+
+	function fixer.update(dt)
+		fixer.x = self.clickables.maker.x + 200
+		fixer.y = self.clickables.maker.y + 30
+
+		fixer.timer = fixer.timer + dt
+		if fixer.timer > 1 and self.fixed then
+			if math.random() > 0.95 and not self.filling then
+				self.fixed = false
+				fixer.lights = imgMan:getImage('maker-status-broken')
+			end
+			fixer.timer = 0
+		end
+		self.fixing = false
+	end
+
+	function fixer.onClick()
+		self.fixed = true
+		fixer.lights = imgMan:getImage('maker-status-fixed')
+		self.fixing = true
+	end
+
+	function fixer.draw()
+		love.graphics.draw(fixer.sprite, fixer.x, fixer.y)
+		love.graphics.draw(fixer.lights, fixer.x - 150, fixer.y)
+	end
+	
+	return fixer
+
 end
