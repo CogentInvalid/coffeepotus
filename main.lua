@@ -68,7 +68,7 @@ function love.mousepressed(x, y, button)
 end
 
 function love.resize(w, h)
-	gameMode.cam:setDimensions(w,h)
+	--gameMode.cam:setDimensions(w,h)
 end
 
 function setFullscreen()

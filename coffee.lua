@@ -8,7 +8,6 @@ end
 
 function coffee:update(dt)
 	self.meter = self.meter - self.drainRate*dt
-	--debug(self.meter)
 end
 
 function coffee:draw()
@@ -16,7 +15,6 @@ function coffee:draw()
 	self.canvas:clear()
 	love.graphics.setColor(0,255,0)
 	love.graphics.rectangle("fill",10,10,self.meter*400,100)
-	debug(self.meter*100)
 	love.graphics.setCanvas()
 	love.graphics.draw(self.canvas, 500, 0)
 end
