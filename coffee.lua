@@ -22,6 +22,7 @@ end
 
 function coffee:update(dt)
 	self.meter = self.meter - self.drainRate*dt
+	if self.meter < 0 then self.meter = 0 end
 	self.bgPos = self.bgPos + 100*dt
 	if self.bgPos > 0 then self.bgPos = -178 end
 
@@ -38,7 +39,6 @@ function coffee:draw()
 	for k, v in pairs(self.clickables) do
 		v.draw()
 	end
-	love.graphics.rectangle("fill",10,10,self.meter*400,100)
 	love.graphics.setCanvas()
 	love.graphics.draw(self.canvas, 500, 0)
 end
@@ -239,9 +239,11 @@ function coffee:newFixer()
 	end
 
 	function fixer.onClick()
-		self.fixed = true
-		fixer.lights = imgMan:getImage('maker-status-fixed')
-		self.fixing = true
+		if not self.filling then
+			self.fixed = true
+			fixer.lights = imgMan:getImage('maker-status-fixed')
+			self.fixing = true
+		end
 	end
 
 	function fixer.draw()
