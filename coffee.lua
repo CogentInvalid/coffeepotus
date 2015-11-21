@@ -77,7 +77,7 @@ function coffee:newCup(x, y)
 	cup.destY = y
 
 	function cup.onClick()
-		if math.random() > 0.95 then
+		if math.random() > 0.90 then
 			cup.destY = 700
 		elseif cup.sipsLeft >= 1 then
 			if cup.sipsLeft == 1 and not self.hasPot then
@@ -94,7 +94,21 @@ function coffee:newCup(x, y)
 	function cup.update(dt)
 		cup.x = cup.x - (cup.x - cup.destX)*4*dt
 		if cup.y < cup.destY then
-			cup.y = cup.y + 100*dt
+			cup.y = cup.y + 1000*dt
+			if cup.y > cup.destY then
+				sfx['shatter']:play()
+				cup.x = 999999999
+				cup.y = 400
+				cup.destX = 150
+				cup.destY = 400
+				cup.sipsLeft = 0
+				cup.sprite = imgMan:getImage('coffee-cup-'..cup.sipsLeft)
+
+				if not self.hasPot then
+					self.clickables.pot = self:newPot(20, 200)
+					self.hasPot = true
+				end
+			end
 		end
 	end
 
