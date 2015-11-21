@@ -3,12 +3,16 @@ coffee = class:new()
 function coffee:init()
 	self.canvas = love.graphics.newCanvas(500,600)
 	self.meter = 1
+<<<<<<< HEAD
 	self.drainRate = 0.02
 	self.sipsLeft = 3
 
 	self.clickables = {}
 
 	table.insert(self.clickables, self:newCup(100, 400))
+=======
+	self.drainRate = 0.05
+>>>>>>> e292e979addba96c69eed5d1854de1137077155f
 end
 
 function coffee:update(dt)

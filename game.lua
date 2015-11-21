@@ -1,5 +1,3 @@
---require "camera"
---require "collisionManager"
 require "paperwork"
 require "ent/gameObject"
 require "ent/cursor"
@@ -12,17 +10,17 @@ function game:init()
 	accum = 0
 	pause = false
 
+	self.canvas = love.graphics.newCanvas(500,600)
+
 	--components
 	self.component = {}
-	--self.colMan = self:addComponent(collisionManager)
-	--self.cam = self:addComponent(camera)
 
-	--self.drawOrder = {"back", "front"}
-
+	--gameplay stuff
 	self.minigames = {}
 	self.currentMinigame = paperwork:new()
 
-	self.canvas = love.graphics.newCanvas(500,600)
+	self.timer = 10
+	self.endTimer = 2
 
 	self:start()
 end
@@ -44,6 +42,20 @@ function game:update(delta)
 
 		self.currentMinigame:update(dt)
 
+		if self.currentMinigame.finished then
+			self.timer = 0
+		end
+
+		self.timer = self.timer - dt
+		if self.timer <= 0 then
+			self.endTimer = self.endTimer - dt
+			if self.endTimer <= 0 then
+				self.endTimer = 2
+				self.timer = 10
+				self.currentMinigame = paperwork:new()
+			end
+		end
+
 		accum = accum - 0.01
 	end
 	if accum>0.1 then accum = 0 end
@@ -55,13 +67,19 @@ function game:draw()
 	love.graphics.setCanvas(self.canvas)
 	self.canvas:clear()
 	self.currentMinigame:draw()
+
+	--timer
+	love.graphics.setColor(0,255,0)
+	love.graphics.rectangle("fill",10,10,(self.timer/10)*400,50)
+
+	love.graphics.setColor(255,255,255)
 	love.graphics.setCanvas()
 	love.graphics.draw(self.canvas, 0, 0)
 
 end
 
 function game:keypressed(key)
-
+	self.currentMinigame:keypressed(key)
 end
 
 function game:mousepressed(x, y, b)
