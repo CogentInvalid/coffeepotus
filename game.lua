@@ -1,4 +1,5 @@
 require "paperwork"
+require "speech"
 require "ent/gameObject"
 require "ent/cursor"
 
@@ -16,8 +17,9 @@ function game:init()
 	self.component = {}
 
 	--gameplay stuff
-	self.minigames = {}
-	self.currentMinigame = paperwork:new(self)
+	self.minigames = {paperwork, speech}
+	local randgame = randomSelect(self.minigames)
+	self.currentMinigame = randgame:new(self)
 
 	self.wobble = 1
 	self.timer = 10
@@ -73,7 +75,8 @@ function game:update(delta)
 		if self.paperTimer > 0 then
 			self.paperTimer = self.paperTimer - dt
 			if self.paperTimer <= 0 then
-				self.currentMinigame = paperwork:new(self)
+				local randgame = randomSelect(self.minigames)
+				self.currentMinigame = randgame:new(self)
 				self.timer = 10
 			end
 
