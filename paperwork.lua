@@ -4,7 +4,7 @@ function paperwork:init()
 
 	self.cursor = cursor:new({x=200,y=300})
 
-	local options = {"peas", "budget"}
+	local options = {"peas", "budget", "peas-reverse"}
 	self.papx = math.random(50,150); self.papy = math.random(100,200) --target paper position
 	self:getThing(randomSelect(options))
 
@@ -24,6 +24,10 @@ function paperwork:getThing(thing)
 		self.successZone = {85,227,129,274}
 		self.failZone = {141,227,178,269}
 	end
+	if thing == "peas-reverse" then
+		self.successZone = {141,227,178,269}
+		self.failZone = {85,227,129,274}
+	end
 	if thing == "budget" then
 		self.successZone = {118,147,158,196}
 		self.failZone = {55,131,224,194}
@@ -33,11 +37,13 @@ end
 
 function paperwork:update(dt)
 
-	self.cursor:update(dt)
+	if self.cursor ~= nil then
+		self.cursor:update(dt)
+	end
 
 	self.paper.x = self.paper.x - (self.paper.x - self.papx)*5*dt
 	self.paper.y = self.paper.y - (self.paper.y - self.papy)*5*dt
-	debug(love.mouse.getX()-self.paper.x .. ", " .. love.mouse.getY()-self.paper.y)
+	--debug(love.mouse.getX()-self.paper.x .. ", " .. love.mouse.getY()-self.paper.y)
 
 end
 
@@ -65,13 +71,13 @@ function paperwork:draw()
 	love.graphics.setColor(r,g,b)
 	love.graphics.print(str, x, y)
 
-	self.cursor:draw()
+	if self.cursor ~= nil then self.cursor:draw() end
 	love.graphics.setColor(255,0,0)
 	love.graphics.setColor(255,255,255)
 end
 
 function paperwork:keypressed(key)
-	if key == "z" then
+	if key == "z" and not self.finished then
 		local phys = self.cursor.phys
 		local x = phys.x+phys.w/2; local y = phys.y+phys.h/2
 
@@ -79,11 +85,15 @@ function paperwork:keypressed(key)
 		if x>self.successZone[1]+self.paper.x and y>self.paper.y+self.successZone[2]
 		and x<self.paper.x+self.successZone[3] and y<self.paper.y+self.successZone[4] then
 			self.state = "win"
+			self.finished = true
+			self.cursor = nil
 		else
 			--test fail zone
 			if x>self.failZone[1]+self.paper.x and y>self.paper.y+self.failZone[2]
 			and x<self.paper.x+self.failZone[3] and y<self.paper.y+self.failZone[4] then
 				self.state = "lose"
+				self.finished = true
+				self.cursor = nil
 			else
 				self.state = "miss"
 			end

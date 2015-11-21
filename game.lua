@@ -20,6 +20,7 @@ function game:init()
 	self.currentMinigame = paperwork:new()
 
 	self.timer = 10
+	self.endTimer = 2
 
 	self:start()
 end
@@ -39,14 +40,20 @@ function game:update(delta)
 			if comp.update ~= nil then comp:update(dt) end
 		end
 
-		if not self.currentMinigame.finished then
-			self.currentMinigame:update(dt)
+		self.currentMinigame:update(dt)
+
+		if self.currentMinigame.finished then
+			self.timer = 0
 		end
 
 		self.timer = self.timer - dt
 		if self.timer <= 0 then
-			self.timer = 10
-			self.currentMinigame = paperwork:new()
+			self.endTimer = self.endTimer - dt
+			if self.endTimer <= 0 then
+				self.endTimer = 2
+				self.timer = 10
+				self.currentMinigame = paperwork:new()
+			end
 		end
 
 		accum = accum - 0.01
