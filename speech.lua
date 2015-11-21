@@ -101,17 +101,22 @@ function speech:getThing(thing)
 		
 	if thing == "food" then
 		self.question = "What is your favorite food?"
+<<<<<<< HEAD
 		op[1] = {"Hamburger", true, 1}
 		op[2] = {"Pizza", true, 1}
 		op[3] = {"Whale", false, 1}
+=======
+		op[1] = {"Hamburger\n", true, 1}
+		op[2] = {"Pizza\n", true, 1}
+		op[3] = {"Whale\n", false, 1}
+>>>>>>> origin/master
 		self.winString = "An American Classic"
 		self.loseString = "The poor whales..."
-		self.winPaper = {"PRESIDENT HAS GOOD TASTES IN FOOD", "DRAMATIC LACK OF SURPRISE"}
+		self.winPaper = {"PRESIDENT HAS GOOD TASTES IN FOOD", "FEW ARE SURPRISED"}
 		self.losePaper = {"PRESIDENT EATS WHALES", "ANIMAL CONSERVATIONISTS HORRIFIED"}
 	end
 	
 	
-
 	local ugh = {false,false,false}
 	self.answer = {}
 
