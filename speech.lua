@@ -12,8 +12,8 @@ function speech:init(parent)
 	self.answerTimer = 1
 
 	self.finished = false
-	self.headline = "NO HEADLINE SET"
-	self.subtitle = "NO SUBTITLE SET"
+	self.headline = "PRESIDENT HAS GONE MUTE"
+	self.subtitle = "COULD NOT BE REACHED FOR COMMENT, OBVIOUSLY"
 
 end
 
@@ -26,8 +26,8 @@ function speech:getThing(thing)
 		op[3] = {"Video games are the last\nlight in a dying world!", true, 2}
 		self.winString = "Acceptable!"
 		self.loseString = "Appalling!"
-		self.winPaper = {"PRESIDENT ENDORSES VIDEOGAMES", "GOOD JUDGMENT LAUDED BY ALL"}
-		self.losePaper = {"PRESIDENT HATES VIDEOGAMES", "IGNORES THE HIDDEN VALUE OF THE MEDIUM"}
+		self.winPaper = {"PRESIDENT ENDORSES GAMES", "GOOD JUDGMENT LAUDED BY ALL"}
+		self.losePaper = {"PRESIDENT HATES GAMES", "IGNORES THE HIDDEN VALUE OF THE MEDIUM"}
 	end
 
 	if thing == "jews" then

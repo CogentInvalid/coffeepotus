@@ -28,6 +28,8 @@ function game:init()
 
 	self.endPaper = {x=0, y=600}
 	self.news = imgMan:getImage("newspaper")
+	self.happyface = imgMan:getImage("happyface")
+	self.sadface = imgMan:getImage("sadface")
 	self.headline = "???"
 	self.subtitle = "..."
 
@@ -75,7 +77,7 @@ function game:update(delta)
 					sfx['boo']:play()
 				end
 				self.endTimer = 0
-				self.paperTimer = 3
+				self.paperTimer = 3.5
 				--set paper
 				self.headline = self.currentMinigame.headline
 				self.subtitle = self.currentMinigame.subtitle
@@ -122,7 +124,14 @@ function game:draw()
 	love.graphics.setFont(bigfont)
 	love.graphics.printf(self.headline, self.endPaper.x+50, self.endPaper.y+80, 400)
 	love.graphics.setFont(font)
-	love.graphics.printf(self.subtitle, self.endPaper.x+50, self.endPaper.y+180, 400)
+	love.graphics.printf(self.subtitle, self.endPaper.x+50, self.endPaper.y+190, 400)
+	--image
+	love.graphics.setColor(255,255,255)
+	if self.currentMinigame.state == 'win' then
+		love.graphics.draw(self.happyface, self.endPaper.x+50, self.endPaper.y+250)
+	else
+		love.graphics.draw(self.sadface, self.endPaper.x+50, self.endPaper.y+250)
+	end
 
 end
 

@@ -13,8 +13,8 @@ function paperwork:init(parent)
 	self.state = "wait"
 
 	self.finished = false
-	self.headline = "NO HEADLINE SET"
-	self.subtitle = "NO SUBTITLE SET"
+	self.headline = "PRES IS LAZY"
+	self.subtitle = "FAILS TO TAKE ACTION ON CRITICAL ISSUE"
 
 end
 
@@ -31,24 +31,32 @@ function paperwork:getThing(thing)
 		self.failZone = {141,227,178,269}
 		self.winString = "PEAS ACHIEVED"
 		self.loseString = "PEAS DESTROYED"
+		self.losePaper = {"WORLD WAR 3 BEGINS", "'ALL BECAUSE OF THE PRESIDENT'S DEADLY CLUMSINESS' SAYS GENERAL"}
+		self.winPaper = {"WORLD PEAS UPHOLDED", "WHAT EVEN IS 'WORLD PEAS', IS IT LIKE A VEGETABLE OR SOMETHING"}
 	end
 	if thing == "peas-reverse" then
 		self.successZone = {141,227,178,269}
 		self.failZone = {85,227,129,274}
 		self.winString = "PEAS ACHIEVED"
 		self.loseString = "PEAS DESTROYED"
+		self.losePaper = {"WORLD WAR 3 BEGINS", "'ALL BECAUSE OF THE PRESIDENT'S DEADLY CLUMSINESS' SAYS GENERAL"}
+		self.winPaper = {"WORLD PEAS UPHOLDED", "WHAT EVEN IS 'WORLD PEAS', IS IT LIKE A VEGETABLE OR SOMETHING"}
 	end
 	if thing == "budget" then
 		self.successZone = {118,147,158,196}
 		self.failZone = {55,131,224,194}
 		self.winString = "BUDGET PASSED"
 		self.loseString = "BUDGET UNPASSED"
+		self.losePaper = {"MILLIONS LOSE THEIR JOBS", "PRESIDENT ONLY PERSON LEFT EMPLOYED"}
+		self.winPaper = {"ROUTINE BUDGET PASSED", "NOTHING ELSE HAPPENS. WHAT CAN I SAY; IT'S A SLOW NEWS DAY"}
 	end
 	if thing == "candy" then
 		self.successZone = {25,17,54,50}
 		self.failZone = {25,153,236,195}
 		self.winString = "CANDY SAVED"
 		self.loseString = "DREAMS CRUSHED"
+		self.winPaper = {"'A CANDY FOR EVERY CHILD'", "PRES PROBABLY CAN'T DELIVER ON HIS PROMISE BUT IT'S THE THOUGHT THAT COUNTS"}
+		self.losePaper = {"CANDY OUTLAWED", "MILLIONS OF SMALL CHILDREN STARVE TO DEATH"}
 	end
 
 end
@@ -110,6 +118,8 @@ function paperwork:keypressed(key)
 		and x<self.paper.x+self.successZone[3] and y<self.paper.y+self.successZone[4] then
 			sfx['stamp']:play()
 			self.state = "win"
+			self.headline = self.winPaper[1]
+			self.subtitle = self.winPaper[2]
 			self:finish()
 		else
 			--test fail zone
@@ -117,6 +127,8 @@ function paperwork:keypressed(key)
 			and x<self.paper.x+self.failZone[3] and y<self.paper.y+self.failZone[4] then
 				sfx['stamp']:play()
 				self.state = "lose"
+				self.headline = self.losePaper[1]
+				self.subtitle = self.losePaper[2]
 				self:finish()
 			else
 				self.state = "miss"
