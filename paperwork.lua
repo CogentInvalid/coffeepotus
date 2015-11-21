@@ -13,6 +13,8 @@ function paperwork:init(parent)
 	self.state = "wait"
 
 	self.finished = false
+	self.headline = "NO HEADLINE SET"
+	self.subtitle = "NO SUBTITLE SET"
 
 end
 
