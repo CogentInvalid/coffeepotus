@@ -83,8 +83,8 @@ function speech:getThing(thing)
 		op[3] = {"Death to the poor, via\ntaxes!", false, 2}
 		self.winString = "Popular stance"
 		self.loseString = "But the poor..."
-		self.winPaper = {"PRESIDENT PROMISES LOW TAXES", "PEOPLE CELEBRATE"}
-		self.losePaper = {"PRESIDENT HATES THE POOR", "DRAMATIC TAX INCREASES ON THE POOR"}
+		self.winPaper = {"PRES PROMISES LOW TAXES", "PEOPLE CELEBRATE"}
+		self.losePaper = {"PRES HATES THE POOR", "DRAMATIC TAX INCREASES ON THE POOR"}
 	end
 	
 	if thing == "geneology" then
@@ -95,7 +95,7 @@ function speech:getThing(thing)
 		self.winString = "An admirable role model."
 		self.loseString = "A NAZI!"
 		self.winPaper = {"PRES RECOGNIZES A TRUE HERO", "CELEBRITIES OFFER THEIR APPROVAL"}
-		self.losePaper = {"PRES HOPES TO BE LITERALLY HITLER", "PROTESTS STILL PENDING"}
+		self.losePaper = {"PRES HOPES TO BE LITERALLY HITLER", "POLITICAL ANALYSTS 'DID NAZI THAT COMING'"}
 	end
 		
 	if thing == "food" then
@@ -120,15 +120,15 @@ function speech:getThing(thing)
 		self.losePaper = {"PRESIDENT UNINFORMED", "IS HE EVEN FIT TO LEAD OUR NATION? (NO)"}
 	end
 	
-	if thing = "war" then
+	if thing == "war" then
 		self.question = "How do you plan to wage the war on terror?"
 		op[1] = {"With carefully calculation", true, 1}
 		op[2] = {"With rapid strikes", true, 1}
 		op[3] = {"By deploying more trolls", false, 1}
 		self.winString = "A good plan"
 		self.loseString = "A strange plan..."
-		self.winPaper = {"PRESIDENT PLANS BOLD OFFENSIVES", "MORALE OF TROOPS INCREASES"}
-		self.losePaper = {"PRESIDENT REQUESTS FIRST-EVER TROLL DEPLOYMENT", "THE TROLLS HAVE NOT YET BEEN LOCATED"}
+		self.winPaper = {"PRESIDENT PLANS BOLD OFFENSIVE", "MORALE OF TROOPS INCREASES"}
+		self.losePaper = {"PRES REQUESTS TROLL DEPLOYMENT", "THE TROLLS HAVE NOT YET BEEN LOCATED"}
 	end
 	
 	

@@ -21,7 +21,7 @@ function game:init()
 	local randgame = randomSelect(self.minigames)
 	self.currentMinigame = randgame:new(self)
 
-	self.wobble = 1
+	self.wobble = 0.5
 	self.timer = 10
 	self.endTimer = 0
 	self.paperTimer = 0

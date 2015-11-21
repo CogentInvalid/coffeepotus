@@ -3,7 +3,7 @@ coffee = class:new()
 function coffee:init()
 	self.canvas = love.graphics.newCanvas(500,600)
 	self.meter = 1
-	self.drainRate = 0.04
+	self.drainRate = 0.02
 
 	self.clickables = {}
 
