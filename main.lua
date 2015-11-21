@@ -63,7 +63,7 @@ end
 
 function love.mousepressed(x, y, button)
 
-	--currentMode:mousepressed(x, y, button)
+	coffeeScreen:mousepressed(x, y, button)
 
 end
 

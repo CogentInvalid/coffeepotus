@@ -14,7 +14,7 @@ function paperwork:update(dt)
 
 	self.cursor:update(dt)
 
-	debug(love.mouse.getX()-self.paper.x .. ", " .. love.mouse.getY()-self.paper.y)
+	-- debug(love.mouse.getX()-self.paper.x .. ", " .. love.mouse.getY()-self.paper.y)
 
 end
 
