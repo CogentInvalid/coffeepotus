@@ -2,13 +2,31 @@ paperwork = class:new()
 
 function paperwork:init()
 
-	self.cursor = cursor:new({x=200,y=200})
-	peas = imgMan:getImage("peas")
-	self.paper = {img=imgMan:getImage("peas"), x=100, y=200}
-	self.successZone = {85,227,129,274}
-	self.failZone = {141,227,178,269}
+	self.cursor = cursor:new({x=200,y=300})
+
+	local options = {"peas", "budget"}
+	self:getThing(randomSelect(options))
+	--self.paper = {img=imgMan:getImage("peas"), x=100, y=200}
+	--self.successZone = {85,227,129,274}
+	--self.failZone = {141,227,178,269}
 
 	self.state = "wait"
+
+end
+
+function paperwork:getThing(thing)
+
+	if thing == "peas" then
+		self.paper = {img=imgMan:getImage("peas"), x=100, y=200}
+		self.successZone = {85,227,129,274}
+		self.failZone = {141,227,178,269}
+	end
+
+	if thing == "budget" then
+		self.paper = {img=imgMan:getImage("budget"), x=100, y=200}
+		self.successZone = {118,147,158,196}
+		self.failZone = {55,131,224,194}
+	end
 
 end
 
