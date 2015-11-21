@@ -4,12 +4,14 @@ function speech:init(parent)
 
 	self.parent = parent
 
-	local options = {"games", "jews", "colors"}
+	local options = {"games", "jews", "colors", "allegations"}
 	self:getThing(randomSelect(options))
 
 	self.state = "wait"
 
 	self.answerTimer = 1
+
+	self.finishTime = 4
 
 	self.finished = false
 	self.headline = "PRESIDENT HAS GONE MUTE"
@@ -50,6 +52,17 @@ function speech:getThing(thing)
 		self.loseString = "He must be a socialist!"
 		self.winPaper = {"GOD BLESS AMERICA", "EAGLE TEARS RAIN OVER WHITE HOUSE"}
 		self.losePaper = {"PRES CONFIRMED COMMUNIST", "COULD NOT BE REACHED FOR COMMENT"}
+	end
+
+	if thing == "allegations" then
+		self.question = "What do you say to the allegations levied against you?"
+		op[1] = {"I believe with full\nconviction that the alligators\nare false!", false, 3}
+		op[2] = {"LOL what a joke! I'm\nthe coolest president ever.", true, 2}
+		op[3] = {"What allegations? I\nallegate that there ARE no\nallegations.", true, 3}
+		self.winString = "Huh, I never thought of it like that."
+		self.loseString = "How insulting! Some of my best friends are alligators!"
+		self.winPaper = {"CONTROVERSY AVERTED", "ONLY SPOTS ON PRESIDENT'S RECORD ARE COFFEE STAINS"}
+		self.losePaper = {"PRESIDENT HATES ALLIGATORS!", "THE PEOPLE'S SUSPICIONS WERE TRUE AFTER ALL"}
 	end
 
 	local ugh = {false,false,false}
