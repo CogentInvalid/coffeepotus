@@ -4,7 +4,8 @@ function speech:init(parent)
 
 	self.parent = parent
 
-	local options = {"games", "jews", "colors", "allegations", "guns", "taxes", "geneology", "food"}
+	--local options = {"games", "jews", "colors", "allegations", "guns", "taxes", "geneology", "food"}
+	local options = {"policy"}
 	self:getThing(randomSelect(options))
 
 	self.state = "wait"
@@ -108,6 +109,17 @@ function speech:getThing(thing)
 		self.loseString = "The poor whales..."
 		self.winPaper = {"PRESIDENT HAS GOOD TASTE IN FOOD", "FEW ARE SURPRISED"}
 		self.losePaper = {"PRESIDENT EATS WHALES", "ANIMAL CONSERVATIONISTS HORRIFIED"}
+	end
+
+	if thing == "policy" then
+		self.question = "Tell us about your plans for foreign trade policy, especially in the Middle East. Our dependence on foreign oil has long been a decisive factor in our trade policy; do you intend on changing this fact and if so, how?"
+		op[1] = {"That's a very good\nquestion. 9/11.", true, 2}
+		op[2] = {"What? I... I don't know.\nWhat do you want me\nto say?", false, 3}
+		op[3] = {"Maybe... maybe bomb\neveryone?", false, 2}
+		self.winString = "(standing ovation)"
+		self.loseString = "WOW. You're so bad at this."
+		self.winPaper = {"PRESIDENT MENTIONS 9/11", "PRESIDENT MENTIONS 9/11"}
+		self.losePaper = {"PRESIDENT UNINFORMED", "IS HE EVEN FIT TO LEAD OUR NATION? (NO)"}
 	end
 	
 	
