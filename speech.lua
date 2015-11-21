@@ -4,7 +4,8 @@ function speech:init(parent)
 
 	self.parent = parent
 
-	local options = {"games", "jews", "colors", "allegations", "guns", "taxes", "geneology", "food", "war", "policy"}
+	--local options = {"games", "jews", "colors", "allegations", "guns", "taxes", "geneology", "food", "war", "policy"}
+	local options = {"war"}
 	self:getThing(randomSelect(options))
 
 	self.state = "wait"
@@ -103,9 +104,9 @@ function speech:getThing(thing)
 		op[1] = {"Hamburger", true, 1}
 		op[2] = {"Pizza", true, 1}
 		op[3] = {"Whale", false, 1}
-		self.winString = "An American Classic"
+		self.winString = "An American classic."
 		self.loseString = "The poor whales..."
-		self.winPaper = {"PRESIDENT HAS GOOD TASTE IN FOOD", "FEW ARE SURPRISED"}
+		self.winPaper = {"PRES HAS GOOD TASTE IN FOOD", "FEW ARE SURPRISED"}
 		self.losePaper = {"PRESIDENT EATS WHALES", "ANIMAL CONSERVATIONISTS HORRIFIED"}
 	end
 
@@ -122,13 +123,13 @@ function speech:getThing(thing)
 	
 	if thing == "war" then
 		self.question = "How do you plan to wage the war on terror?"
-		op[1] = {"With carefully calculation", true, 1}
-		op[2] = {"With rapid strikes", true, 1}
+		op[1] = {"With careful calculation\nand strategy", true, 2}
+		op[2] = {"With rapid, unrelenting\nstrikes", true, 2}
 		op[3] = {"By deploying more trolls", false, 1}
 		self.winString = "A good plan"
 		self.loseString = "A strange plan..."
 		self.winPaper = {"PRESIDENT PLANS BOLD OFFENSIVE", "MORALE OF TROOPS INCREASES"}
-		self.losePaper = {"PRES REQUESTS TROLL DEPLOYMENT", "THE TROLLS HAVE NOT YET BEEN LOCATED"}
+		self.losePaper = {"TROLL ENLISTMENT PLANNED", "THE TROLLS HAVE NOT YET BEEN LOCATED"}
 	end
 	
 	
