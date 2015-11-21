@@ -94,7 +94,7 @@ function speech:draw()
 	local r = 0; local g = 0; local b = 0
 	local str = ""
 	if self.state == "win" then
-		r=0; g=255; b=0
+		r=0; g=150; b=0
 		str = self.winString
 	end
 	if self.state == "lose" then
@@ -110,19 +110,19 @@ function speech:draw()
 	-- answers
 	love.graphics.setColor(0,0,0)
 	if self.choice == 1 then
-		if self.answer[1][2] then love.graphics.setColor(0,255,0) else love.graphics.setColor(255,0,0) end
+		if self.answer[1][2] then love.graphics.setColor(0,150,0) else love.graphics.setColor(255,0,0) end
 	end
 	love.graphics.print("1. " .. self.a1, 20, self.y1)
 
 	love.graphics.setColor(0,0,0)
 	if self.choice == 2 then
-		if self.answer[2][2] then love.graphics.setColor(0,255,0) else love.graphics.setColor(255,0,0) end
+		if self.answer[2][2] then love.graphics.setColor(0,150,0) else love.graphics.setColor(255,0,0) end
 	end
 	love.graphics.print("2. " .. self.a2, 20, self.y2)
 
 	love.graphics.setColor(0,0,0)
 	if self.choice == 3 then
-		if self.answer[3][2] then love.graphics.setColor(0,255,0) else love.graphics.setColor(255,0,0) end
+		if self.answer[3][2] then love.graphics.setColor(0,150,0) else love.graphics.setColor(255,0,0) end
 	end
 	love.graphics.print("3. " .. self.a3, 20, self.y3)
 
