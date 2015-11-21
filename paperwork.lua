@@ -25,14 +25,20 @@ function paperwork:getThing(thing)
 	if thing == "peas" then
 		self.successZone = {85,227,129,274}
 		self.failZone = {141,227,178,269}
+		self.winString = "PEAS ACHIEVED"
+		self.loseString = "PEAS DESTROYED"
 	end
 	if thing == "peas-reverse" then
 		self.successZone = {141,227,178,269}
 		self.failZone = {85,227,129,274}
+		self.winString = "PEAS ACHIEVED"
+		self.loseString = "PEAS DESTROYED"
 	end
 	if thing == "budget" then
 		self.successZone = {118,147,158,196}
 		self.failZone = {55,131,224,194}
+		self.winString = "BUDGET PASSED"
+		self.loseString = "BUDGET UNPASSED"
 	end
 
 end
@@ -59,11 +65,11 @@ function paperwork:draw()
 
 	if self.state == "win" then
 		r=0; g=255; b=0
-		str = "YA DID IT SON"
+		str = self.winString
 	end
 	if self.state == "lose" then
 		r=255; g=0; b=0
-		str = "YA DONE GOOFED SON"
+		str = self.loseString
 	end
 	if self.state == "miss" then
 		r=255; g=255; b=0
@@ -72,8 +78,8 @@ function paperwork:draw()
 
 	love.graphics.setColor(r,g,b)
 	love.graphics.print(str, x, y)
-
 	if self.cursor ~= nil then self.cursor:draw() end
+
 	love.graphics.setColor(255,0,0)
 	love.graphics.setColor(255,255,255)
 end
@@ -104,4 +110,5 @@ end
 
 function paperwork:finish()
 	self.finished = true
+	self.cursor.img = self.cursor:addComponent(image:new("check"))
 end

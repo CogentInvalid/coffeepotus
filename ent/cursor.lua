@@ -10,7 +10,7 @@ function cursor:init(args)
 
 	--phys component
 	self.phys = self:addComponent(physics:new(self, args.x, args.y, 36, 40))
-	self.img = self:addComponent(image:new("check"))
+	self.img = self:addComponent(image:new("check-shadow"))
 end
 
 function cursor:update(dt)
