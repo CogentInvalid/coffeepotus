@@ -38,11 +38,11 @@ function intermission:draw()
 
 	love.graphics.setColor(89,89,89)
 	love.graphics.setFont(bigfont)
-	love.graphics.printf("PLACEHOLDER HEADLINE", 100, 180, 800)
+	love.graphics.printf("PLACEHOLDER HEADLINE", self.paper.x+100, self.paper.y+180, 800)
 	love.graphics.setFont(font)
 	love.graphics.printf("PRESS SPACE TO CONTINUE", 100, 270, 800)
 
-	love.graphics.setColor(89,89,89,100)
+	love.graphics.setColor(230,230,230)
 	love.graphics.rectangle("fill", 500, 320, 400, 200)
 
 	love.graphics.setLineWidth(5)

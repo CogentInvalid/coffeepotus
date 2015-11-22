@@ -65,7 +65,7 @@ function love.update(dt)
 		if intermission then
 			interScreen:update(dt)
 		end
-		if gameScreen.gamesPlayed >= 3 then
+		if gameScreen.gamesPlayed >= 8 then
 			nextLevel()
 		end
 	end
@@ -77,6 +77,7 @@ end
 function nextLevel()
 	intermission = true
 	interScreen:setGraph(ratingsHistory)
+	ratingsHistory = {ratings}
 	currentLevel = currentLevel + 1
 	gameScreen.gamesPlayed = 0
 	gameScreen.wobble = gameScreen.wobble + 0.15
