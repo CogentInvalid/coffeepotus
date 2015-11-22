@@ -22,7 +22,16 @@ end
 
 function coffee:update(dt)
 	self.meter = self.meter - self.drainRate*dt
-	if self.meter < 0 then self.meter = 0 end
+	if self.meter < 0 then
+		self.meter = 0
+		if gameScreen.currentMinigame.state == 'wait' then
+			self.meter = 1
+			gameScreen.currentMinigame.state = 'fail'
+			gameScreen.currentMinigame.headline = 'PRESIDENT FALLS ASLEEP'
+			gameScreen.currentMinigame.subtitle = "DOESN'T HE KNOW HE SHOULDN'T NEED TO SLEEP?"
+			gameScreen.currentMinigame.finished = true
+		end
+	end
 	self.bgPos = self.bgPos + 100*dt
 	if self.bgPos > 0 then self.bgPos = -178 end
 

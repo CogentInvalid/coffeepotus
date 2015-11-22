@@ -8,7 +8,7 @@ function handsAndBabies:init(parent)
 
 	self.finished = false
 	self.headline = "PRES REFUSES TO SHAKE HANDS"
-	self.subtitle = "Is he racist?"
+	self.subtitle = "IS HE RACIST?"
 
 	self.pres = {}
 	self.pres.ar = 0 -- arm rotation
@@ -100,13 +100,19 @@ end
 function handsAndBabies:draw()
 	love.graphics.setFont(mono)
 
-	love.graphics.print(self.shakeKey..': Shake hand\n'..self.leanKey..': Lean down', 20, 50)
+
+	if self.state == 'wait' or self.state == 'win' then
+		love.graphics.setColor(0, 255, 0)
+	else
+		love.graphics.setColor(255, 0, 0)
+	end
 
 	love.graphics.print(self.shakerSays, 20, 100)
 
-	love.graphics.setColor(255, 0, 0)
-
 	love.graphics.setColor(255,255,255)
+	
+
+	love.graphics.print(self.shakeKey..': Shake hand\n'..self.leanKey..': Lean down', 20, 50)
 	love.graphics.draw(imgMan:getImage('pres-legs'), 350, 350)
 	love.graphics.draw(imgMan:getImage('pres-torso'), 390, 350, self.pres.tr, 1, 1, 40, 160)
 	love.graphics.draw(imgMan:getImage('pres-arm'), 380 + math.sin(self.pres.tr)*50, 360 - math.cos(self.pres.tr)*60, self.pres.ar, 1, 1, 15, 15)
