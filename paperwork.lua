@@ -106,7 +106,7 @@ function paperwork:getThing(thing)
 		self.state = "win"
 		self.successZone = {0,0,0,0}
 		self.failZone = {85,228,180,267}
-		self.loseString = "Wait, what did you just sign?"
+		self.loseString = "WAIT, WHAT DID YOU JUST SIGN?"
 		self.winString = ""
 		self.headline = "PRES REFUSES TO SIGN PAPER"
 		self.subtitle = "'PAPER SAID NOT TO SIGN IT.' PRESIDENT'S WISDOM IS CLEARLY BOUNDLESS."
