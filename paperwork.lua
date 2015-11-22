@@ -70,7 +70,6 @@ function paperwork:getThing(thing)
 		self.winPaper = {"'A CANDY FOR EVERY CHILD'", "PRES PROBABLY CAN'T DELIVER ON HIS PROMISE BUT IT'S THE THOUGHT THAT COUNTS"}
 		self.losePaper = {"CANDY OUTLAWED", "MILLIONS OF SMALL CHILDREN STARVE TO DEATH"}
 	end
-<<<<<<< HEAD
 	if thing == "war" then
 		self.successZone = {85,227,129,274}
 		self.failZone = {141,227,178,269}
@@ -78,6 +77,7 @@ function paperwork:getThing(thing)
 		self.loseString = "World War Pea begins"
 		self.winPaper("PRESIDENT PREVENTS WORLD WAR PEA", "MINOR WAR PEA GROWERS REJOICE")
 		self.losePaper("PRESIDENT CAUSES WORLD WAR PEA", "CITIZENS SUSPECT THE INTERFERENCE OF PEA LOBBYISTS")
+	end
 		
 	if thing = "debt" then
 		self.successZone {141,227,178,269}
@@ -86,8 +86,8 @@ function paperwork:getThing(thing)
 		self.loseString = "DEBT CRISIS CREATED"
 		self.winPaper("PRESIDENT AVOIDS DEBT CRISIS", "POPULACE RELIEVED")
 		self.losePaper("DEBT CRISIS CREATED", "ANALYSTS BLAME A CLERICAL ERROR")
-		
-=======
+	end
+
 	if thing == "nuke" then
 		self.successZone = {90,138,127,170}
 		self.failZone = {130,141,170,174}
@@ -96,9 +96,7 @@ function paperwork:getThing(thing)
 		self.winPaper = {"NOTHING BAD HAPPENS", "LOREM IPSUM DOLOR SID AMET, CONSECITUR ADIPISCING ELIT"}
 		self.losePaper = {"US DECLARES WAR ON CHINA", "ECONOMY CRASHES AS IMPORTS SLOW TO A CRAWL"}
 	end
->>>>>>> origin/master
 
-end
 
 function paperwork:update(dt)
 
