@@ -76,7 +76,7 @@ function paperwork:getThing(thing)
 		self.losePaper("PRESIDENT CAUSES WORLD WAR PEA", "CITIZENS SUSPECT THE INTERFERENCE OF PEA LOBBYISTS")
 	end
 		
-	if thing = "debt" then
+	if thing == "debt" then
 		self.successZone {141,227,178,269}
 		self.failZone = {85,227,129,274}
 		self.winString = "DEBT CRISIS AVOIDED"
@@ -93,7 +93,7 @@ function paperwork:getThing(thing)
 		self.winPaper = {"NOTHING BAD HAPPENS", "LOREM IPSUM DOLOR SID AMET, CONSECITUR ADIPISCING ELIT"}
 		self.losePaper = {"US DECLARES WAR ON CHINA", "ECONOMY CRASHES AS IMPORTS SLOW TO A CRAWL"}
 	end
-
+end
 
 function paperwork:update(dt)
 
