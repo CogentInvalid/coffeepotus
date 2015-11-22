@@ -41,6 +41,7 @@ function love.load()
 	sfx['paper']:play()
 	currentTut = 1
 	gameStarted = false
+	titleDismissed = false
 
 	intermission = false
 
@@ -54,9 +55,11 @@ function love.update(dt)
 	input:update(dt)
 
 	if not gameStarted then
-		for i=1, currentTut do
-			tut[i].y = tut[i].y - (tut[i].y-0)*5*dt
-			promptx = promptx - (promptx - (50+350*currentTut))*3*dt
+		if titleDismissed then
+			for i=1, currentTut do
+				tut[i].y = tut[i].y - (tut[i].y-0)*5*dt
+				promptx = promptx - (promptx - (50+350*currentTut))*3*dt
+			end
 		end
 	else
 		if not intermission then
@@ -99,10 +102,15 @@ function love.draw()
 		love.graphics.setColor(50,35,0)
 		love.graphics.rectangle("fill", 0, 0, 1000, 600)
 		love.graphics.setColor(255,255,255)
-		for i=1, 3 do
-			love.graphics.draw(tut[i].img, 0, tut[i].y)
+		if not titleDismissed then
+			love.graphics.draw(imgMan:getImage('title'), 0, 0)
+			love.graphics.draw(spaceprompt, 400, 450)
+		else
+			for i=1, 3 do
+				love.graphics.draw(tut[i].img, 0, tut[i].y)
+			end
+			love.graphics.draw(spaceprompt, promptx, 250)
 		end
-		love.graphics.draw(spaceprompt, promptx, 250)
 	end
 
 	debugger:draw()
@@ -114,10 +122,13 @@ function love.keypressed(key)
 	if key == " " and intermission then
 		intermission = false
 	else
-
 		if not gameStarted then
-			if key == " " then currentTut = currentTut + 1; sfx['paper']:play() end
-			if currentTut == 4 then gameStarted = true end
+			if not titleDismissed then
+				titleDismissed = true
+			else
+				if key == " " then currentTut = currentTut + 1; sfx['paper']:play() end
+				if currentTut == 4 then gameStarted = true end
+			end
 		else
 			gameScreen:keypressed(key)
 			coffeeScreen:keypressed(key)
