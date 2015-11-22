@@ -40,6 +40,7 @@ function love.load()
 
 	-- comment these out to give playtesters an easy time
 	nextLevel()
+	nextLevel()
 
 end
 
