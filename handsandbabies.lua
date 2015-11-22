@@ -14,7 +14,7 @@ function handsAndBabies:init(parent)
 	self.pres.ar = 0 -- arm rotation
 	self.pres.tr = 0 -- torso rotation
 	self.pres.arl = 0 -- local arm rotation
-	self.pres.ard = 0 -- arm rotation destination
+	self.pres.ard = 0 -- arm rotation destination22222222222
 	self.pres.trd = 0 --torso rotation destination
 
 	self.shaking = false
@@ -27,7 +27,7 @@ function handsAndBabies:init(parent)
 	self.shakeKey = '1'
 	self.leanKey = '2'
 
-	self.positions = {-250, -50, 150, 800, 800, 800}
+	self.positions = {-150, 50, 220, 800, 800, 800}
 	self.types = {'adult', 'child'}
 	self.currentShaker = 3
 
@@ -57,8 +57,8 @@ function handsAndBabies:update(dt)
 		self.leaning = false
 	end
 
-	self.pres.arl = self.pres.arl + (self.pres.ard - self.pres.arl)*10*dt
-	self.pres.tr = self.pres.tr + (self.pres.trd - self.pres.tr)*10*dt
+	self.pres.arl = self.pres.arl + (self.pres.ard - self.pres.arl)*20*dt
+	self.pres.tr = self.pres.tr + (self.pres.trd - self.pres.tr)*20*dt
 	self.pres.ar = self.pres.tr + self.pres.arl
 
 	if not self.betweenShakers and not self.finished then
@@ -114,8 +114,8 @@ function handsAndBabies:draw()
 
 	love.graphics.print(self.shakeKey..': Shake hand\n'..self.leanKey..': Lean down', 20, 50)
 	love.graphics.draw(imgMan:getImage('pres-legs'), 350, 350)
-	love.graphics.draw(imgMan:getImage('pres-torso'), 390, 350, self.pres.tr, 1, 1, 40, 160)
-	love.graphics.draw(imgMan:getImage('pres-arm'), 380 + math.sin(self.pres.tr)*50, 360 - math.cos(self.pres.tr)*60, self.pres.ar, 1, 1, 15, 15)
+	love.graphics.draw(imgMan:getImage('pres-torso'), 390, 350, self.pres.tr, 1, 1, 37, 176)
+	love.graphics.draw(imgMan:getImage('pres-arm'), 390 + math.sin(self.pres.tr)*50, 340 - math.cos(self.pres.tr)*60, self.pres.ar, 1, 1, 15, 15)
 
 	for i, v in ipairs(self.queue) do
 		love.graphics.draw(v.sprite, v.x, v.y)
