@@ -1,6 +1,7 @@
 require "paperwork"
 require "speech"
 require "handsandbabies"
+require "strategy"
 require "ent/gameObject"
 require "ent/cursor"
 
@@ -23,7 +24,7 @@ function game:init()
 	self.paperTimer = 0
 
 	--gameplay stuff
-	self.minigames = {paperwork, speech, handsAndBabies}
+	self.minigames = {paperwork, speech, handsAndBabies, strategy}
 	local randgame = randomSelect(self.minigames)
 	self.currentMinigame = randgame:new(self)
 
@@ -119,7 +120,7 @@ function game:draw()
 
 	--timer
 	love.graphics.setColor(0,255,0)
-	love.graphics.rectangle("fill",10,10,(self.timer/10)*400,50)
+	love.graphics.rectangle("fill",10,10,(self.timer/10)*400,20)
 
 	love.graphics.setColor(255,255,255)
 	--end paper
