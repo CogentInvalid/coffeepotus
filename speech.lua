@@ -263,7 +263,7 @@ function speech:draw()
 		str = self.question
 	end
 	love.graphics.setColor(r,g,b)
-	love.graphics.printf(str, 50, 75, 400)
+	love.graphics.printf(str, 50, 90, 400)
 
 	-- answers
 	love.graphics.setColor(255, 255, 255)
