@@ -33,8 +33,9 @@ function handsAndBabies:init(parent)
 		end
 		self.leanKey = str:sub(pos, pos)
 	else
-		self.shakeKey = '1'
-		self.leanKey = '2'
+		self.shakeKey = math.random(2)
+		self.leanKey = ''..(3 - self.shakeKey)
+		self.shakeKey = self.shakeKey..''
 	end
 
 	self.positions = {-120, 50, 220, 800, 800, 800}

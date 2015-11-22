@@ -84,7 +84,7 @@ function nextLevel()
 	ratingsHistory = {ratings}
 	currentLevel = currentLevel + 1
 	gameScreen.gamesPlayed = 0
-	gameScreen.wobble = gameScreen.wobble + 0.15
+	gameScreen.wobble = gameScreen.wobble + 0.2
 	coffeeScreen.meter = 1
 	coffeeScreen.drainRate = coffeeScreen.drainRate + 0.005
 end

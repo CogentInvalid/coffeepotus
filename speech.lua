@@ -11,8 +11,12 @@ function speech:init(parent)
 
 	self.answerTimer = 1
 
-	self.garbleRate = self.parent.wobble/2.5
-
+	if currentLevel >= 2 then
+		self.garbleRate = (self.parent.wobble - 0.2)/2.5	
+	else
+		self.garbleRate = 0.05
+	end
+	
 	self.finishTime = 2
 
 	self.finished = false
