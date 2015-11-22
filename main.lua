@@ -28,6 +28,19 @@ function love.load()
 	input = inputManager:new()
 	audio = audioManager:new()
 
+	startGame()
+
+	-- comment these out to give playtesters an easy time
+	--nextLevel()
+
+end
+
+function startGame()
+	currentLevel = 1
+	oldRatings = 100
+	ratings = 100
+	ratingsHistory = {100}
+
 	gameScreen = game:new()
 	coffeeScreen = coffee:new()
 	interScreen = intermission:new()
@@ -43,11 +56,8 @@ function love.load()
 	gameStarted = false
 	titleDismissed = false
 
-	intermission = false
-
-	-- comment these out to give playtesters an easy time
-	--nextLevel()
-
+	inIntermission = false
+	gameOver = false
 end
 
 function love.update(dt)
@@ -62,11 +72,11 @@ function love.update(dt)
 			end
 		end
 	else
-		if not intermission then
+		if not inIntermission then
 			gameScreen:update(dt)
 			coffeeScreen:update(dt)
 		end
-		if intermission then
+		if inIntermission then
 			interScreen:update(dt)
 		end
 		if gameScreen.gamesPlayed >= 6 then
@@ -79,9 +89,11 @@ function love.update(dt)
 end
 
 function nextLevel()
-	intermission = true
+	inIntermission = true
+	interScreen.graph = {}
 	interScreen:setGraph(ratingsHistory)
 	ratingsHistory = {ratings}
+	oldRatings = ratings
 	currentLevel = currentLevel + 1
 	gameScreen.gamesPlayed = 0
 	gameScreen.wobble = gameScreen.wobble + 0.2
@@ -89,9 +101,18 @@ function nextLevel()
 	coffeeScreen.drainRate = coffeeScreen.drainRate + 0.005
 end
 
+function endGame()
+	gameOver = true
+	inIntermission = true
+	interScreen.graph = {}
+	interScreen:setGraph(ratingsHistory)
+	interScreen.headline = "PRESIDENT IMPEACHED"
+	interScreen.subtitle = "FIRST EVER TO HAVE NEGATIVE APPROVAL RATING\nPRESS SPACE TO PLAY AGAIN"
+end
+
 function love.draw()
 
-	if not intermission then
+	if not inIntermission then
 		gameScreen:draw()
 		coffeeScreen:draw()
 	else
@@ -119,8 +140,11 @@ end
 
 function love.keypressed(key)
 
-	if key == " " and intermission then
-		intermission = false
+	if key == " " and inIntermission then
+		inIntermission = false
+		if gameOver then
+			startGame()
+		end
 	else
 		if not gameStarted then
 			if not titleDismissed and key == " " then

@@ -7,6 +7,8 @@ function intermission:init()
 
 	self.graph = {}
 
+	self.subtitle = "PRESS SPACE TO CONTINUE"
+
 end
 
 function intermission:update(dt)
@@ -48,7 +50,7 @@ function intermission:draw()
 	love.graphics.setFont(bigfont)
 	love.graphics.printf(self.headline, self.paper.x+100, self.paper.y+180, 800)
 	love.graphics.setFont(font)
-	love.graphics.printf("PRESS SPACE TO CONTINUE", 100, 270, 800)
+	love.graphics.printf(self.subtitle, 100, 270, 800)
 
 	love.graphics.setColor(230,230,230)
 	love.graphics.rectangle("fill", 500, 320, 400, 200)
