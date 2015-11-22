@@ -26,7 +26,7 @@ function game:init()
 	--gameplay stuff
 	self.minigames = {paperwork, speech, handsAndBabies, strategy}
 	local randgame = randomSelect(self.minigames)
-	self.currentMinigame = handsAndBabies:new(self)
+	self.currentMinigame = randgame:new(self)
 	self.gamesPlayed = 0
 
 	self.endPaper = {x=0, y=600}

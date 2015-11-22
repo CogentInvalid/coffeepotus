@@ -95,10 +95,9 @@ end
 
 function strategy:draw()
 
-	love.graphics.setColor(50,35,0)
-	love.graphics.rectangle("fill", 0, 0, 500, 600)
+	love.graphics.setColor(255, 255, 255)
+	love.graphics.draw(imgMan:getImage('desk'), 0, 0)
 
-	love.graphics.setColor(255,255,255)
 	love.graphics.draw(self.map.img, self.map.x, self.map.y)
 
 	local r = 255; local g = 255; local b = 255

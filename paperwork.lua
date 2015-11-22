@@ -70,9 +70,9 @@ function paperwork:getThing(thing)
 		self.failZone = {85,227,129,274}
 		self.successZone = {141,227,178,269}
 		self.winString = "WAR AVOIDED"
-		self.loseString = "WORLD WAR PEA BEGINS"
-		self.winPaper = {"WORLD WAR PEA PREVENTED", "MINOR WAR PEA GROWERS REJOICE"}
-		self.losePaper = {"PRESIDENT CAUSES WORLD WAR PEA", "CITIZENS SUSPECT THE INTERFERENCE OF PEA LOBBYISTS"}
+		self.loseString = "WORLD WAR PEAS BEGINS"
+		self.winPaper = {"WORLD WAR PEAS PREVENTED", "MINOR WAR PEA GROWERS REJOICE"}
+		self.losePaper = {"PRESIDENT CAUSES WORLD WAR PEAS", "CITIZENS SUSPECT THE INTERFERENCE OF PEA LOBBYISTS"}
 	end
 		
 	if thing == "debt" then
@@ -89,7 +89,7 @@ function paperwork:getThing(thing)
 		self.successZone = {85,227,129,274}
 		self.winString = "DEBT CRISIS SOLVED"
 		self.loseString = "DEBT CRISIS CONTINUES"
-		self.winPaper = {"PRESIDENT SOLVES DEBT CRISIS", "THE POPULACE IS RELIEVED"}
+		self.winPaper = {"PRESIDENT SOLVES DEBT CRISIS", "ANALYSTS SCRATCH HEADS"}
 		self.losePaper = {"DEBT CRISIS CONTINUES", "PEOPLE BEGIN TO QUESTION WHETHER THIS CONSTITUTES NEWS"}
 	end
 
@@ -130,10 +130,9 @@ end
 
 function paperwork:draw()
 
-	love.graphics.setColor(50,35,0)
-	love.graphics.rectangle("fill", 0, 0, 500, 600)
+	love.graphics.setColor(255, 255, 255)
+	love.graphics.draw(imgMan:getImage('desk'), 0, 0)
 
-	love.graphics.setColor(255,255,255)
 	love.graphics.draw(self.paper.img, self.paper.x, self.paper.y, 0, 30/50, 30/50)
 
 	local r = 255; local g = 255; local b = 255

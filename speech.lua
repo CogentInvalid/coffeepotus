@@ -4,7 +4,7 @@ function speech:init(parent)
 
 	self.parent = parent
 
-	local options = {"games", "jews", "colors", "allegations", "guns", "taxes", "geneology", "food", "war", "policy", "guy"}
+	local options = {"games", "jews", "colors", "allegations", "guns", "taxes", "geneology", "food", "policy", "war", "guy", "nsa", "education"}
 	self:getThing(randomSelect(options))
 
 	self.state = "wait"
@@ -74,7 +74,7 @@ function speech:getThing(thing)
 		op[3] = {"The right to bear arms is\nsacred", true, 2}
 		self.winString = "A reasonable stance."
 		self.loseString = "The bears would hardly approve"
-		self.winPaper = {"PRES ENDS DEBATE","DEBATE MOVES ONTO EXPLOSIVES CONTROL DEBATES"}
+		self.winPaper = {"GUN CONTROL DEBATE ENDS","DEBATE MOVES ONTO EXPLOSIVES CONTROL DEBATES"}
 		self.losePaper = {"PRESIDENT HATES BEARS", "POLLING DROPS AMONG BEAR DEMOGRAPHIC"}
 	end
 		
@@ -143,7 +143,29 @@ function speech:getThing(thing)
 		self.winPaper = {"PRES REFUSES TO GIVE UP JOB", "PROOF THAT THEY STILL HAVE COMMAND OF THEIR MENTAL FACULTIES"}
 		self.losePaper = {"RANDOM GUY MADE PRESIDENT", "CALLS JOB 'TOO HARD', GIVES IT BACK TO ORIGINAL PRESIDENT WITHIN THE MONTH"}
 	end
-	
+
+	if thing == "nsa" then
+		self.question = "Will you dismantle the NSA's internet surveillence program?"
+		op[1] = {"Not after reading\nYOUR emails.", false, 2}
+		op[2] = {"Even if I did, you\nwouldn't believe me.", false, 2}
+		op[3] = {"It's important to stop\nterrorists.", true, 2}
+		self.winString = "You're darn right it is!"
+		self.loseString = "Wait what."
+		self.winPaper = {"PRESIDENT TOUGH ON TERRORISTS", "WHAT WERE WE TALKING ABOUT AGAIN?"}
+		self.losePaper = {"PRESIDENT SPIES ON EVERYONE", "DID SNOWDEN TEACH US NOTHING?"}
+	end
+
+	if thing == "education" then
+		self.question = "Agree or disagree: You would disagree with decreasing education funding."
+		op[1] = {"Disagree.", false, 1}
+		op[2] = {"Dis I agree with.", true, 1}
+		op[3] = {"This I disagree with.", false, 1}
+		self.winString = "Good decision, Mr. President."
+		self.loseString = "But... think of the children!"
+		self.winPaper = {"PRES PROTECTS EDUCATION", "NATION UNAWARE EDUCATION WAS UNDER ATTACK"}
+		self.losePaper = {"PRES HATES EDUCATION", "WANTS TO MURDER REASON ITSELF"}
+	end
+
 	local ugh = {false,false,false}
 	self.answer = {}
 
@@ -218,14 +240,14 @@ function speech:draw()
 
 	love.graphics.setFont(mono)
 
-	love.graphics.setColor(250,250,200)
-	love.graphics.rectangle("fill", 0, 0, 500, 600)
+	love.graphics.setColor(250,250,250)
+	love.graphics.draw(imgMan:getImage('speech-bg'), 0, 0)
 
 	-- question
 	local r = 0; local g = 0; local b = 0
 	local str = ""
 	if self.state == "win" then
-		r=0; g=150; b=0
+		r=0; g=255; b=0
 		str = self.winString
 	end
 	if self.state == "lose" then
@@ -233,27 +255,28 @@ function speech:draw()
 		str = self.loseString
 	end
 	if self.state == "wait" then
+		r=255; g=255; b=255
 		str = self.question
 	end
 	love.graphics.setColor(r,g,b)
-	love.graphics.printf(str, 200, 400, 250)
+	love.graphics.printf(str, 150, 480, 250)
 
 	-- answers
-	love.graphics.setColor(0,0,0)
+	love.graphics.setColor(255, 255, 255)
 	if self.choice == 1 then
-		if self.answer[1][2] then love.graphics.setColor(0,150,0) else love.graphics.setColor(255,0,0) end
+		if self.answer[1][2] then love.graphics.setColor(0,255,0) else love.graphics.setColor(255,0,0) end
 	end
 	love.graphics.print("1. " .. self.a1, self.x1, self.y1)
 
-	love.graphics.setColor(0,0,0)
+	love.graphics.setColor(255, 255, 255)
 	if self.choice == 2 then
-		if self.answer[2][2] then love.graphics.setColor(0,150,0) else love.graphics.setColor(255,0,0) end
+		if self.answer[2][2] then love.graphics.setColor(0,255,0) else love.graphics.setColor(255,0,0) end
 	end
 	love.graphics.print("2. " .. self.a2, self.x2, self.y2)
 
-	love.graphics.setColor(0,0,0)
+	love.graphics.setColor(255, 255, 255)
 	if self.choice == 3 then
-		if self.answer[3][2] then love.graphics.setColor(0,150,0) else love.graphics.setColor(255,0,0) end
+		if self.answer[3][2] then love.graphics.setColor(0,255,0) else love.graphics.setColor(255,0,0) end
 	end
 	love.graphics.print("3. " .. self.a3, self.x3, self.y3)
 

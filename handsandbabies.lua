@@ -14,7 +14,7 @@ function handsAndBabies:init(parent)
 	self.pres.ar = 0 -- arm rotation
 	self.pres.tr = 0 -- torso rotation
 	self.pres.arl = 0 -- local arm rotation
-	self.pres.ard = 0 -- arm rotation destination22222222222
+	self.pres.ard = 0 -- arm rotation destination
 	self.pres.trd = 0 --torso rotation destination
 
 	self.shaking = false
@@ -24,8 +24,21 @@ function handsAndBabies:init(parent)
 
 	self.shakerSays = ''
 
-	self.shakeKey = '1'
-	self.leanKey = '2'
+	if self.parent.wobble > 0.8 then
+		local str = 'abcdefghijklmnopqrstuvwxyz1234567890'	
+		local pos = math.random(str:len())
+		self.shakeKey = str:sub(pos,pos)
+		while str:sub(pos, pos) == self.shakeKey do 
+			pos = math.random(str:len())
+		end
+		self.leanKey = str:sub(pos, pos)
+	elseif self.parent.wobble > 0.5 then
+		self.shakeKey = '2'
+		self.leanKey = '1'
+	else
+		self.shakeKey = '1'
+		self.leanKey = '2'
+	end
 
 	self.positions = {-120, 50, 220, 800, 800, 800}
 	self.types = {'adult', 'child'}
@@ -43,19 +56,27 @@ end
 function handsAndBabies:update(dt)
 	if love.keyboard.isDown(self.shakeKey) then
 		self.pres.ard = math.pi/2
-		self.shaking = true
 	else
 		self.pres.ard = 0
+	end
+
+	if self.pres.arl > math.pi/3 then
+		self.shaking = true
+	else
 		self.shaking = false
 	end
 
-	if love.keyboard.isDown(self.leanKey) then
+	if love.keyboard.isDown(self.leanKey) and not self.finished then
 		self.pres.trd = -math.pi/5
-		self.leaning = true
 	else
 		self.pres.trd = 0
-		self.leaning = false
 	end
+
+	if self.pres.tr < -math.pi/7 then
+		self.leaning = true
+	else
+		self.leaning = false
+	end 
 
 	self.pres.arl = self.pres.arl + (self.pres.ard - self.pres.arl)*20*dt
 	self.pres.tr = self.pres.tr + (self.pres.trd - self.pres.tr)*20*dt
@@ -65,6 +86,7 @@ function handsAndBabies:update(dt)
 		if self.queue[self.currentShaker].type == 'child' then
 			if self.leaning and self.shaking then
 				self.shakerSays = '"I want to be just like you!"'
+				sfx['child']:play()
 				self:continue()
 			elseif self.shaking and not self.leaning then
 				sfx['slap']:play()
@@ -76,6 +98,7 @@ function handsAndBabies:update(dt)
 		else
 			if self.shaking and not self.leaning then
 				self.shakerSays = '"Good speech, Mr. President"'
+				sfx['hmm-'..math.random(3)]:play()
 				self:continue()
 			elseif self.leaning then
 				sfx['slap']:play()
