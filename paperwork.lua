@@ -76,7 +76,7 @@ function paperwork:getThing(thing)
 	end
 		
 	if thing == "debt" then
-		self.successZone {141,227,178,269}
+		self.successZone = {141,227,178,269}
 		self.failZone = {85,227,129,274}
 		self.winString = "DEBT CRISIS AVOIDED"
 		self.loseString = "DEBT CRISIS CREATED"
