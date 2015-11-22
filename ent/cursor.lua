@@ -8,9 +8,11 @@ function cursor:init(args)
 
 	self.wobble = 1
 
+	local img = args.img or "check-shadow"
+
 	--phys component
 	self.phys = self:addComponent(physics:new(self, args.x, args.y, 36, 40))
-	self.img = self:addComponent(image:new("check-shadow"))
+	self.img = self:addComponent(image:new(img))
 end
 
 function cursor:update(dt)
@@ -37,8 +39,8 @@ function cursor:update(dt)
 end
 
 function cursor:draw()
-	love.graphics.setColor(255,255,255)
-	self.img:draw(self.phys.x, self.phys.y, 30/50, 30/50)
+	--love.graphics.setColor(255,255,255)
+	--self.img:draw(self.phys.x, self.phys.y, 30/50, 30/50)
 	--love.graphics.setColor(255,0,0,100)
 	--love.graphics.rectangle("fill", self.phys.x, self.phys.y, self.phys.w, self.phys.h)
 end

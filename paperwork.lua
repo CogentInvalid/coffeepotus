@@ -135,7 +135,10 @@ function paperwork:draw()
 
 	love.graphics.setColor(r,g,b)
 	love.graphics.printf(str, x, y, 300, "center")
-	if self.cursor ~= nil then self.cursor:draw() end
+	if self.cursor ~= nil then
+		love.graphics.setColor(255,255,255)
+		self.cursor.img:draw(self.cursor.phys.x, self.cursor.phys.y, 30/50, 30/50)
+	end
 
 	love.graphics.setColor(255,0,0)
 	love.graphics.setColor(255,255,255)

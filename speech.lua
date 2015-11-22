@@ -90,7 +90,7 @@ function speech:getThing(thing)
 	end
 	
 	if thing == "geneology" then
-		self.question = "Which leader would you most like to be related to?"
+		self.question = "Which world leader would you most like to be related to?"
 		op[1] = {"Adolf Hitler", false,1}
 		op[2] = {"Abraham Lincoln", true, 1}
 		op[3] = {"Nicholas Cage", true, 1}
