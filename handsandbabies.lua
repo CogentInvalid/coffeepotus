@@ -47,7 +47,7 @@ function handsAndBabies:init(parent)
 
 	self.queue = {}
 	for i = 1, 3 do
-		self.queue[i] = self:newShaker(self.types[math.random(2)], self.positions[i], i)
+		self.queue[i] = self:newShaker(self.types[math.random(#self.types)], self.positions[i], i)
 	end
 end
 

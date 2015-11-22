@@ -90,7 +90,7 @@ function coffee:newCup(x, y)
 	cup.destY = y
 
 	function cup.onClick()
-		if currentLevel >= 2 and math.random() > 0.85 then
+		if currentLevel >= 2 and math.random() > 0.9 then
 			cup.destY = 700
 			self.hasCup = false
 		elseif cup.sipsLeft >= 1 then
@@ -257,8 +257,10 @@ function coffee:newFixer()
 	end
 
 	function fixer.draw()
-		love.graphics.draw(fixer.sprite, fixer.x, fixer.y)
-		love.graphics.draw(fixer.lights, fixer.x - 150, fixer.y)
+		if currentLevel >= 2 then
+			love.graphics.draw(fixer.sprite, fixer.x, fixer.y)
+			love.graphics.draw(fixer.lights, fixer.x - 150, fixer.y)
+		end
 	end
 	
 	return fixer
