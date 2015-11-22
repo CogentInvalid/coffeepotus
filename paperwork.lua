@@ -6,15 +6,16 @@ function paperwork:init(parent)
 
 	self.cursor = cursor:new({x=200,y=300})
 
-	local options = {"peas", "budget", "peas-reverse", "candy", "peas-quad", "war", "debt", "nuke", "debtReverse", "sign"}
-	self.papx = math.random(50,150); self.papy = math.random(100,200) --target paper position
-	self:getThing(randomSelect(options))
-
 	self.state = "wait"
 
 	self.finished = false
 	self.headline = "PRES IS LAZY"
 	self.subtitle = "FAILS TO TAKE ACTION ON CRITICAL ISSUE"
+
+	--local options = {"peas", "budget", "peas-reverse", "candy", "peas-quad", "war", "debt", "nuke", "debtReverse", "sign"}
+	local options = {"sign"}
+	self.papx = math.random(50,150); self.papy = math.random(100,200) --target paper position
+	self:getThing(randomSelect(options))
 
 end
 
@@ -104,11 +105,12 @@ function paperwork:getThing(thing)
 	if thing == "sign" then
 		self.state = "win"
 		self.successZone = {0,0,0,0}
-		self.failZone = {0,300,0,300}
-		self.loseString = "What did you just sign?"
-		self.winString = "Discretion is the better part of paperwork"
-		self.winPaper = {"PRESIDENT WISELY REFUSES TO SIGN PAPER", "PAPER SAID NOT TO SIGN IT"}
-		self.losePaper = {"PRESIDENT SIGNS BILL WITHOUT READING IT", "BILL SAID NOT TO SIGN IT"}
+		self.failZone = {85,228,180,267}
+		self.loseString = "Wait, what did you just sign?"
+		self.winString = ""
+		self.headline = "PRES REFUSES TO SIGN PAPER"
+		self.subtitle = "'PAPER SAID NOT TO SIGN IT.' PRESIDENT'S WISDOM IS CLEARLY BOUNDLESS."
+		self.losePaper = {"PRES SIGNS BILL WITHOUT READING", "'BILL SAID NOT TO SIGN IT'"}
 	end
 end
 
@@ -185,7 +187,7 @@ function paperwork:keypressed(key)
 				self.subtitle = self.losePaper[2]
 				self:finish()
 			else
-				self.state = "miss"
+				--self.state = "miss"
 			end
 		end
 
