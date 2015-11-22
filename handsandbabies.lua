@@ -24,7 +24,7 @@ function handsAndBabies:init(parent)
 
 	self.shakerSays = ''
 
-	if self.parent.wobble > 0.8 then
+	if currentLevel >= 3 then
 		local str = 'abcdefghijklmnopqrstuvwxyz1234567890'	
 		local pos = math.random(str:len())
 		self.shakeKey = str:sub(pos,pos)
@@ -32,7 +32,7 @@ function handsAndBabies:init(parent)
 			pos = math.random(str:len())
 		end
 		self.leanKey = str:sub(pos, pos)
-	elseif self.parent.wobble > 0.5 then
+	elseif currentLevel >= 2 then
 		self.shakeKey = '2'
 		self.leanKey = '1'
 	else

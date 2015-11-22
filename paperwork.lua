@@ -12,7 +12,15 @@ function paperwork:init(parent)
 	self.headline = "PRES IS LAZY"
 	self.subtitle = "FAILS TO TAKE ACTION ON CRITICAL ISSUE"
 
-	local options = {"peas", "budget", "peas-reverse", "candy", "peas-quad", "war", "debt", "nuke", "debtReverse", "sign"}
+	local options = {}
+	if currentLevel >= 3 then
+		options = {"budget", "peas-reverse", "candy", "peas-quad", "war", "nuke", "sign"}
+	elseif currentLevel >= 2 then
+		options = {"peas-reverse", "candy", "war", "sign"}
+	else
+		options = {"peas", "debt", "debtReverse"}
+	end
+
 	self.papx = math.random(50,150); self.papy = math.random(100,200) --target paper position
 	self:getThing(randomSelect(options))
 

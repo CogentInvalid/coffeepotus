@@ -13,6 +13,10 @@ function love.load()
 
 	math.randomseed(os.time())
 
+	currentLevel = 1
+	ratings = 100
+	ratingsHistory = {100}
+
 	love.graphics.setBackgroundColor(0,0,0)
 	font = love.graphics.newFont(16)
 	bigfont = love.graphics.newFont(40)
@@ -38,9 +42,6 @@ function love.load()
 	currentTut = 1
 	gameStarted = false
 
-	currentLevel = 1
-	ratings = 100
-	ratingsHistory = {100}
 	intermission = false
 
 	-- comment these out to give playtesters an easy time
@@ -65,7 +66,7 @@ function love.update(dt)
 		if intermission then
 			interScreen:update(dt)
 		end
-		if gameScreen.gamesPlayed >= 8 then
+		if gameScreen.gamesPlayed >= 6 then
 			nextLevel()
 		end
 	end

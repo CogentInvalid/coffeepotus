@@ -6,7 +6,13 @@ function strategy:init(parent)
 
 	self.cursor = cursor:new({x=200,y=300,img="dot"})
 
-	local options = {"map1","map2"}
+	local options = {"map1", "map2", "map3"}
+
+	if currentLevel >= 2 then
+		options = {"map2", "map3"}
+	else
+		options = {"map1"}
+	end
 	self:getThing(randomSelect(options))
 
 	self.state = "wait"
@@ -33,6 +39,11 @@ function strategy:getThing(thing)
 		self.cursor.phys:setPos(92-self.cursor.phys.w/2,430-self.cursor.phys.h/2)
 		self.winHeadline = "ARMY TAKES PENINSULA"
 		self.winSubtitle = "GENERAL: 'IT WAS TOUGH, BUT WE MANAGED TO AVOID STUMBLING HEADLONG INTO THE WATER'"
+	end
+	if thing == "map3" then
+		self.cursor.phys:setPos(61-self.cursor.phys.w/2,300-self.cursor.phys.h/2)
+		self.winHeadline = "ARMY CORRECTLY IDENTIFIES TARGET"
+		self.winSubtitle = "GENERAL: 'NO, WE DON'T MEAN THE STORE'"
 	end
 
 end
