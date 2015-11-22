@@ -6,7 +6,7 @@ function strategy:init(parent)
 
 	self.cursor = cursor:new({x=200,y=300,img="dot"})
 
-	local options = {"map1"}
+	local options = {"map1","map2"}
 	self:getThing(randomSelect(options))
 
 	self.state = "wait"
@@ -29,10 +29,17 @@ function strategy:getThing(thing)
 		self.winHeadline = "CRUSHING MILITARY SUCCESS"
 		self.winSubtitle = "GENERAL: 'THE KEY TO OUR VICTORY WAS WALKING AROUND THE OCEAN'"
 	end
+	if thing == "map2" then
+		self.cursor.phys:setPos(92-self.cursor.phys.w/2,430-self.cursor.phys.h/2)
+		self.winHeadline = "ARMY TAKES PENINSULA"
+		self.winSubtitle = "GENERAL: 'IT WAS TOUGH, BUT WE MANAGED TO AVOID STUMBLING HEADLONG INTO THE WATER'"
+	end
 
 end
 
 function strategy:update(dt)
+
+	--debug(love.mouse.getX() .. ", " .. love.mouse.getY())
 
 	if self.cursor ~= nil and not self.finished then
 		self.cursor.wobble = self.parent.wobble
@@ -59,7 +66,6 @@ function strategy:addPoint(x, y)
 	local r = 12; local g = 12; local b = 12
 	if x > 0 and x < 500 and y > 0 and y < 600 then
 		r, g, b = self.mask:getPixel(x,y)
-		--debug(r .. ", " .. g .. ", " .. b)
 		if r==0 and g==0 and b==0 then
 			self.state = "lose"
 			self.headline = "THOUSANDS OF SOLDIERS DROWN"
