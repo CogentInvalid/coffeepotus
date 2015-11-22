@@ -69,7 +69,7 @@ function paperwork:getThing(thing)
 	if thing == "war" then
 		self.failZone = {85,227,129,274}
 		self.successZone = {141,227,178,269}
-		self.winString = "World War Pea begins"
+		self.winString = "World War Pea avoided"
 		self.loseString = "World War Pea begins"
 		self.winPaper = {"PRESIDENT PREVENTS WORLD WAR PEA", "MINOR WAR PEA GROWERS REJOICE"}
 		self.losePaper = {"PRESIDENT CAUSES WORLD WAR PEA", "CITIZENS SUSPECT THE INTERFERENCE OF PEA LOBBYISTS"}
