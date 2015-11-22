@@ -191,7 +191,7 @@ function speech:getThing(thing)
 	self.a2 = self.answer[2][1]
 	self.a3 = self.answer[3][1]
 
-	self.y1 = 300
+	self.y1 = 250
 	self.y2 = self.y1 + 16 + 16*self.answer[1][3]
 	self.y3 = self.y2 + 16 + 16*self.answer[2][3]
 
@@ -263,7 +263,7 @@ function speech:draw()
 		str = self.question
 	end
 	love.graphics.setColor(r,g,b)
-	love.graphics.printf(str, 50, 125, 400)
+	love.graphics.printf(str, 50, 125, 350)
 
 	-- answers
 	love.graphics.setColor(255, 255, 255)
