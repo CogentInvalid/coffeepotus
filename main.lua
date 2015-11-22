@@ -123,7 +123,7 @@ function love.keypressed(key)
 		intermission = false
 	else
 		if not gameStarted then
-			if not titleDismissed then
+			if not titleDismissed and key == " " then
 				titleDismissed = true
 			else
 				if key == " " then currentTut = currentTut + 1; sfx['paper']:play() end
