@@ -4,7 +4,6 @@ function coffee:init()
 	self.canvas = love.graphics.newCanvas(500,600)
 	self.meter = 1
 	self.drainRate = 0.02
-	self.breakRate = 0.05
 
 	self.clickables = {}
 
@@ -82,7 +81,7 @@ function coffee:newCup(x, y)
 	cup.destY = y
 
 	function cup.onClick()
-		if math.random() < self.breakRate then
+		if math.random() > 0.90 then
 			cup.destY = 700
 			self.hasCup = false
 		elseif cup.sipsLeft >= 1 then
