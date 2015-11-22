@@ -99,10 +99,14 @@ function game:update(delta)
 		if self.paperTimer > 0 then
 			self.paperTimer = self.paperTimer - dt
 			if self.paperTimer <= 0 then
-				self.timer = 10
-				self.gamesPlayed = self.gamesPlayed + 1
-				local randgame = randomSelect(self.minigames)
-				self.currentMinigame = randgame:new(self)
+				if ratings >= 0 then
+					self.timer = 10
+					self.gamesPlayed = self.gamesPlayed + 1
+					local randgame = randomSelect(self.minigames)
+					self.currentMinigame = randgame:new(self)
+				else
+					endGame()
+				end
 			end
 
 			self.endPaper.y = self.endPaper.y - (self.endPaper.y - 0)*10*dt
