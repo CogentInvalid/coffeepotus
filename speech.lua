@@ -13,7 +13,7 @@ function speech:init(parent)
 
 	self.garbleRate = self.parent.wobble/2.5
 
-	self.finishTime = 4
+	self.finishTime = 2
 
 	self.finished = false
 	self.headline = "PRESIDENT HAS GONE MUTE"

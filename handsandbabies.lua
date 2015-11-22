@@ -27,7 +27,7 @@ function handsAndBabies:init(parent)
 	self.shakeKey = '1'
 	self.leanKey = '2'
 
-	self.positions = {-150, 50, 220, 800, 800, 800}
+	self.positions = {-120, 50, 220, 800, 800, 800}
 	self.types = {'adult', 'child'}
 	self.currentShaker = 3
 
@@ -98,24 +98,19 @@ function handsAndBabies:fail()
 end
 
 function handsAndBabies:draw()
+
+	love.graphics.setColor(255, 255, 255)
+
+	love.graphics.draw(imgMan:getImage('handshake-bg'), 0, 0)
+
 	love.graphics.setFont(mono)
-
-
-	if self.state == 'wait' or self.state == 'win' then
-		love.graphics.setColor(0, 255, 0)
-	else
-		love.graphics.setColor(255, 0, 0)
-	end
-
-	love.graphics.print(self.shakerSays, 20, 100)
-
-	love.graphics.setColor(255,255,255)
+	love.graphics.print(self.shakerSays, 20, 120)
 	
 
 	love.graphics.print(self.shakeKey..': Shake hand\n'..self.leanKey..': Lean down', 20, 50)
 	love.graphics.draw(imgMan:getImage('pres-legs'), 350, 350)
-	love.graphics.draw(imgMan:getImage('pres-torso'), 390, 350, self.pres.tr, 1, 1, 37, 176)
-	love.graphics.draw(imgMan:getImage('pres-arm'), 390 + math.sin(self.pres.tr)*50, 340 - math.cos(self.pres.tr)*60, self.pres.ar, 1, 1, 15, 15)
+	love.graphics.draw(imgMan:getImage('pres-torso'), 390, 380, self.pres.tr, 1, 1, 37, 213)
+	love.graphics.draw(imgMan:getImage('pres-arm'), 390 + math.sin(self.pres.tr)*120, 360 - math.cos(self.pres.tr)*100, self.pres.ar, 1, 1, 15, 15)
 
 	for i, v in ipairs(self.queue) do
 		love.graphics.draw(v.sprite, v.x, v.y)
@@ -146,10 +141,10 @@ function handsAndBabies:newShaker(type, x, position)
 	shaker.done = false
 	shaker.position = position
 	if type == 'adult' then
-		shaker.y = 200
+		shaker.y = 190
 		shaker.sprite = imgMan:getImage('handshaker')
 	elseif type == 'child' then
-		shaker.y = 300
+		shaker.y = 290
 		shaker.sprite = imgMan:getImage('handshaker-child')
 	end
 
