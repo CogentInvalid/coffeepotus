@@ -97,7 +97,7 @@ function love.draw()
 		love.graphics.setColor(50,35,0)
 		love.graphics.rectangle("fill", 0, 0, 1000, 600)
 		love.graphics.setColor(255,255,255)
-		for i=1, 8 do
+		for i=1, 3 do
 			love.graphics.draw(tut[i].img, 0, tut[i].y)
 		end
 		love.graphics.draw(spaceprompt, promptx, 250)
