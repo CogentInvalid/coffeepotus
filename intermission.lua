@@ -9,6 +9,7 @@ function intermission:init()
 
 	self.subtitle = "PRESS SPACE TO CONTINUE"
 
+	self.months = {'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'}
 end
 
 function intermission:update(dt)
@@ -60,6 +61,7 @@ function intermission:draw()
 	love.graphics.setFont(font)
 	love.graphics.printf(self.subtitle, 100, self.paper.y+250, 800)
 
+
 	love.graphics.setColor(230,230,230)
 	love.graphics.rectangle("fill", 500, self.paper.y+320, 400, 200)
 
@@ -72,4 +74,6 @@ function intermission:draw()
 	for i=1, #self.graph-1 do
 		love.graphics.line(self.graph[i][1], self.paper.y+self.graph[i][2], self.graph[i+1][1], self.paper.y+self.graph[i+1][2])
 	end
+
+	love.graphics.print(self.months[(currentLevel % 12) + 1], 525 + self.paper.y, 500)
 end
