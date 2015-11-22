@@ -27,11 +27,6 @@ function game:init()
 	local randgame = randomSelect(self.minigames)
 	self.currentMinigame = randgame:new(self)
 
-	--gameplay stuff
-	self.minigames = {paperwork, speech}
-	local randgame = randomSelect(self.minigames)
-	self.currentMinigame = randgame:new(self)
-
 	self.endPaper = {x=0, y=600}
 	self.news = imgMan:getImage("newspaper")
 	self.happyface = imgMan:getImage("happyface")
