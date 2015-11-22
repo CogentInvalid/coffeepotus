@@ -67,12 +67,12 @@ function paperwork:getThing(thing)
 		self.losePaper = {"CANDY OUTLAWED", "MILLIONS OF SMALL CHILDREN STARVE TO DEATH"}
 	end
 	if thing == "war" then
-		self.failZone = {85,227,129,274}
-		self.successZone = {141,227,178,269}
-		self.winString = "World War Pea prevented"
+		self.successZone = {85,227,129,274}
+		self.failZone = {141,227,178,269}
+		self.winString = "World War Pea begins"
 		self.loseString = "World War Pea begins"
-		self.winPaper = {"PRESIDENT PREVENTS WORLD WAR PEA", "MINOR WAR PEA GROWERS REJOICE"}
-		self.losePaper = {"PRESIDENT CAUSES WORLD WAR PEA", "CITIZENS SUSPECT THE INTERFERENCE OF PEA LOBBYISTS"}
+		self.winPaper = ("PRESIDENT PREVENTS WORLD WAR PEA", "MINOR WAR PEA GROWERS REJOICE")
+		self.losePaper = ("PRESIDENT CAUSES WORLD WAR PEA", "CITIZENS SUSPECT THE INTERFERENCE OF PEA LOBBYISTS")
 	end
 		
 	if thing == "debt" then
@@ -80,8 +80,8 @@ function paperwork:getThing(thing)
 		self.failZone = {85,227,129,274}
 		self.winString = "DEBT CRISIS AVOIDED"
 		self.loseString = "DEBT CRISIS CREATED"
-		self.winPaper = {"PRESIDENT AVOIDS DEBT CRISIS", "POPULACE RELIEVED"}
-		self.losePaper = {"DEBT CRISIS CREATED", "ANALYSTS BLAME A CLERICAL ERROR"}
+		self.winPaper = ("PRESIDENT AVOIDS DEBT CRISIS", "POPULACE RELIEVED")
+		self.losePaper = ("DEBT CRISIS CREATED", "ANALYSTS BLAME A CLERICAL ERROR")
 	end
 
 	if thing == "nuke" then
