@@ -6,7 +6,7 @@ function paperwork:init(parent)
 
 	self.cursor = cursor:new({x=200,y=300})
 
-	local options = {"peas", "budget", "peas-reverse", "candy", "peas-quad", "war", "debt", "nuke", "debtReverse"}
+	local options = {"peas", "budget", "peas-reverse", "candy", "peas-quad", "war", "debt", "nuke", "debtReverse", "sign"}
 	self.papx = math.random(50,150); self.papy = math.random(100,200) --target paper position
 	self:getThing(randomSelect(options))
 
@@ -100,6 +100,15 @@ function paperwork:getThing(thing)
 		self.winString = "WAR AVERTED"
 		self.winPaper = {"NOTHING BAD HAPPENS", "LOREM IPSUM DOLOR SID AMET, CONSECITUR ADIPISCING ELIT"}
 		self.losePaper = {"US DECLARES WAR ON CHINA", "ECONOMY CRASHES AS IMPORTS SLOW TO A CRAWL"}
+	end
+	if thing == "sign" then
+		self.state = "win"
+		self.successZone = {0,0,0,0}
+		self.failZone = {0,300,0,300}
+		self.loseString = "What did you just sign?"
+		self.winString = "Discretion is the better part of paperwork"
+		self.winPaper = {"PRESIDENT WISELY REFUSES TO SIGN PAPER", "PAPER SAID NOT TO SIGN IT"}
+		self.losePaper = {"PRESIDENT SIGNS BILL WITHOUT READING IT", "BILL SAID NOT TO SIGN IT"}
 	end
 end
 
