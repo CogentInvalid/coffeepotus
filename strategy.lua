@@ -53,7 +53,7 @@ function strategy:update(dt)
 	--debug(love.mouse.getX() .. ", " .. love.mouse.getY())
 
 	if self.cursor ~= nil and not self.finished then
-		self.cursor.wobble = self.parent.wobble
+		self.cursor.wobble = self.parent.wobble*0.67
 		self.cursor:update(dt)
 	end
 
