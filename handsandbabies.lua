@@ -22,6 +22,8 @@ function handsAndBabies:init(parent)
 
 	self.betweenShakers = false
 
+	self.shakerSays = ''
+
 	self.shakeKey = '1'
 	self.leanKey = '2'
 
@@ -62,18 +64,24 @@ function handsAndBabies:update(dt)
 	if not self.betweenShakers and not self.finished then
 		if self.queue[self.currentShaker].type == 'child' then
 			if self.leaning and self.shaking then
+				self.shakerSays = '"I want to be just like you!"'
 				self:continue()
 			elseif self.shaking and not self.leaning then
+				sfx['slap']:play()
+				self.shakerSays = '*crying*'
 				self.headline = "PRESIDENT SLAPS INNOCENT CHILD"
-				self.subtitle = '"I didn\'t think he had it in him", says concerned mother.'
+				self.subtitle = '"HE SHOULD HAVE LEANED DOWN FIRST", SAYS CONCERNED MOTHER.'
 				self:fail()
 			end
 		else
 			if self.shaking and not self.leaning then
+				self.shakerSays = '"Good speech, Mr. President"'
 				self:continue()
 			elseif self.leaning then
+				sfx['slap']:play()
+				self.shakerSays = '"Why, Mr. President? Why?"'
 				self.headline = "PRESIDENT HEAD- BUTTS CITIZEN"
-				self.subtitle = "Is he starting a War On Foreheads?"
+				self.subtitle = "IS HE STARTING A WAR ON FOREHEADS?"
 				self:fail()
 			end
 		end
@@ -90,9 +98,13 @@ function handsAndBabies:fail()
 end
 
 function handsAndBabies:draw()
+	love.graphics.setFont(mono)
 
-	love.graphics.setColor(50,35,0)
-	love.graphics.rectangle("fill", 0, 0, 500, 600)
+	love.graphics.print(self.shakeKey..': Shake hand\n'..self.leanKey..': Lean down', 20, 50)
+
+	love.graphics.print(self.shakerSays, 20, 100)
+
+	love.graphics.setColor(255, 0, 0)
 
 	love.graphics.setColor(255,255,255)
 	love.graphics.draw(imgMan:getImage('pres-legs'), 350, 350)
@@ -114,7 +126,7 @@ function handsAndBabies:continue()
 	self.betweenShakers = true
 	if self.currentShaker == 0 then
 		self.headline = "PRESIDENT SHAKES HANDS"
-		self.subtitle = "But not in, like, a jazz hands way."
+		self.subtitle = "BUT NOT IN, LIKE, A JAZZ HANDS WAY."
 		self.state = "win"
 		self.finished = true
 	end
