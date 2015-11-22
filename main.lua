@@ -107,7 +107,7 @@ function endGame()
 	interScreen.graph = {}
 	interScreen:setGraph(ratingsHistory)
 	interScreen.headline = "PRESIDENT IMPEACHED"
-	interScreen.subtitle = "FIRST EVER TO HAVE NEGATIVE APPROVAL RATING\nPRESS SPACE TO PLAY AGAIN"
+	interScreen.subtitle = "FIRST EVER TO HAVE NEGATIVE APPROVAL RATING\n\nPRESS SPACE TO PLAY AGAIN"
 end
 
 function love.draw()
