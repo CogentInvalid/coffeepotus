@@ -6,8 +6,7 @@ function paperwork:init(parent)
 
 	self.cursor = cursor:new({x=200,y=300})
 
-	local options = {"peas", "budget", "peas-reverse", "candy", "peas-quad", "war", "debt"}
-	local options = {"peas", "budget", "peas-reverse", "candy", "peas-quad", "nuke"}
+	local options = {"peas", "budget", "peas-reverse", "candy", "peas-quad", "war", "debt", "nuke"}
 	self.papx = math.random(50,150); self.papy = math.random(100,200) --target paper position
 	self:getThing(randomSelect(options))
 
@@ -72,8 +71,8 @@ function paperwork:getThing(thing)
 		self.failZone = {141,227,178,269}
 		self.winString = "World War Pea begins"
 		self.loseString = "World War Pea begins"
-		self.winPaper("PRESIDENT PREVENTS WORLD WAR PEA", "MINOR WAR PEA GROWERS REJOICE")
-		self.losePaper("PRESIDENT CAUSES WORLD WAR PEA", "CITIZENS SUSPECT THE INTERFERENCE OF PEA LOBBYISTS")
+		self.winPaper = ("PRESIDENT PREVENTS WORLD WAR PEA", "MINOR WAR PEA GROWERS REJOICE")
+		self.losePaper = ("PRESIDENT CAUSES WORLD WAR PEA", "CITIZENS SUSPECT THE INTERFERENCE OF PEA LOBBYISTS")
 	end
 		
 	if thing == "debt" then
@@ -81,8 +80,8 @@ function paperwork:getThing(thing)
 		self.failZone = {85,227,129,274}
 		self.winString = "DEBT CRISIS AVOIDED"
 		self.loseString = "DEBT CRISIS CREATED"
-		self.winPaper("PRESIDENT AVOIDS DEBT CRISIS", "POPULACE RELIEVED")
-		self.losePaper("DEBT CRISIS CREATED", "ANALYSTS BLAME A CLERICAL ERROR")
+		self.winPaper = ("PRESIDENT AVOIDS DEBT CRISIS", "POPULACE RELIEVED")
+		self.losePaper = ("DEBT CRISIS CREATED", "ANALYSTS BLAME A CLERICAL ERROR")
 	end
 
 	if thing == "nuke" then
