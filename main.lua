@@ -107,7 +107,7 @@ function endGame()
 	interScreen.graph = {}
 	interScreen:setGraph(ratingsHistory)
 	interScreen.headline = "PRESIDENT IMPEACHED"
-	interScreen.subtitle = "FIRST EVER TO HAVE NEGATIVE APPROVAL RATING\nPRESS SPACE TO PLAY AGAIN"
+	interScreen.subtitle = "FIRST EVER TO HAVE NEGATIVE APPROVAL RATING\n\nPRESS SPACE TO PLAY AGAIN"
 end
 
 function love.draw()
@@ -133,6 +133,9 @@ function love.draw()
 			love.graphics.draw(spaceprompt, promptx, 250)
 		end
 	end
+
+	love.graphics.setColor(0,0,0)
+	love.graphics.rectangle("fill", 0, 600, 1000, 1000)
 
 	debugger:draw()
 
@@ -169,6 +172,8 @@ function love.keypressed(key)
 
 	if key == "escape" then love.event.quit() end
 
+	if key == "f1" then setFullscreen() end
+
 end
 
 function love.mousepressed(x, y, button)
@@ -183,7 +188,7 @@ end
 
 function setFullscreen()
 
-	love.window.setMode(love.window.getDesktopDimensions())
+	love.window.setMode(1000,600)
 	love.window.setFullscreen(true)
 
 end
