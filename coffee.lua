@@ -238,7 +238,7 @@ function coffee:newFixer()
 
 		fixer.timer = fixer.timer + dt
 		if fixer.timer > 1 and self.fixed then
-			if math.random() > 0.95 and not self.filling and currentLevel >= 2 then
+			if math.random() > 0.95 and not self.filling and currentLevel >= 3 then
 				self.fixed = false
 				fixer.lights = imgMan:getImage('maker-status-broken')
 			end
@@ -257,7 +257,7 @@ function coffee:newFixer()
 	end
 
 	function fixer.draw()
-		if currentLevel >= 2 then
+		if currentLevel >= 3 then
 			love.graphics.draw(fixer.sprite, fixer.x, fixer.y)
 			love.graphics.draw(fixer.lights, fixer.x - 150, fixer.y)
 		end
