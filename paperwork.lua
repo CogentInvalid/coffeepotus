@@ -6,7 +6,7 @@ function paperwork:init(parent)
 
 	self.cursor = cursor:new({x=200,y=300})
 
-	local options = {"peas", "budget", "peas-reverse", "candy", "peas-quad", "war", "debt", "nuke"}
+	local options = {"peas", "budget", "peas-reverse", "candy", "peas-quad", "war", "debt", "nuke", "debtReverse"}
 	self.papx = math.random(50,150); self.papy = math.random(100,200) --target paper position
 	self:getThing(randomSelect(options))
 
@@ -82,6 +82,15 @@ function paperwork:getThing(thing)
 		self.loseString = "DEBT CRISIS CREATED"
 		self.winPaper = {"PRESIDENT AVOIDS DEBT CRISIS", "POPULACE RELIEVED"}
 		self.losePaper = {"DEBT CRISIS CREATED", "ANALYSTS BLAME A CLERICAL ERROR"}
+	end
+	
+	if thing == "debtReverse" then
+		self.failZone = {141,227,178,269}
+		self.successZone = {85,227,129,274}
+		self.winString = "DEBT CRISIS SOLVED"
+		self.loseString = "DEBT CRISIS CONTINUES"
+		self.winPaper = {"PRESIDENT SOLVES DEBT CRISIS", "THE POPULACE IS RELIEVED"}
+		self.losePaper = {"DEBT CRISIS CONTINUES", "PEOPLE BEGIN TO QUESTION WHETHER THIS CONSTITUTES NEWS"}
 	end
 
 	if thing == "nuke" then
