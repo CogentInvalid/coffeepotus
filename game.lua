@@ -49,9 +49,9 @@ function game:update(delta)
 	if accum > 0.05 then accum = 0.05 end
 	while accum >= delta do
 
-		effect:send("x", 250)
-		effect:send("y", 300)
 		effect:send("amt", coffeeScreen.meter)
+		effect:send("x", 250)
+		effect:send("y", love.window.getHeight()-300)
 
 		--update components
 		for i,comp in ipairs(self.component) do

@@ -31,7 +31,7 @@ function imgManager:init(parent)
 			number a = color1[3]*color[3];
 			number x2 = pixel_coords[0];
 			number y2 = pixel_coords[1];
-			number dist = sqrt((x-x2)*(x-x2)+((y-y2)*(y-y2))/amt);
+			number dist = sqrt(((x-x2)*(x-x2))+(((y-y2)*(y-y2)))/amt);
 			if(dist > 400)
 			{
 				r = r*pow(amt,1);
