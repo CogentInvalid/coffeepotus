@@ -2,7 +2,7 @@ intermission = class:new()
 
 function intermission:init()
 
-	self.paper = {x=0, y=0}
+	self.paper = {x=0, y=600}
 	self.paperImg = imgMan:getImage("inter-news")
 
 	self.graph = {}
@@ -12,6 +12,9 @@ function intermission:init()
 end
 
 function intermission:update(dt)
+
+
+	self.paper.y = self.paper.y - (self.paper.y-0)*6*dt
 
 end
 
@@ -37,6 +40,8 @@ function intermission:setGraph(pts)
 		self.headline = "PRESIDENT'S RATINGS PLUMMET"
 	end
 
+	self.paper.y = 600
+
 end
 
 function intermission:draw()
@@ -50,18 +55,18 @@ function intermission:draw()
 	love.graphics.setFont(bigfont)
 	love.graphics.printf(self.headline, self.paper.x+100, self.paper.y+180, 800)
 	love.graphics.setFont(font)
-	love.graphics.printf(self.subtitle, 100, 250, 800)
+	love.graphics.printf(self.subtitle, 100, self.paper.y+250, 800)
 
 	love.graphics.setColor(230,230,230)
-	love.graphics.rectangle("fill", 500, 320, 400, 200)
+	love.graphics.rectangle("fill", 500, self.paper.y+320, 400, 200)
 
 	love.graphics.setLineWidth(5)
 	love.graphics.setColor(89,89,89)
 	for i,pt in ipairs(self.graph) do
-		love.graphics.circle("fill", pt[1], pt[2], 6)
+		love.graphics.circle("fill", pt[1], self.paper.y+pt[2], 6)
 	end
 
 	for i=1, #self.graph-1 do
-		love.graphics.line(self.graph[i][1], self.graph[i][2], self.graph[i+1][1], self.graph[i+1][2])
+		love.graphics.line(self.graph[i][1], self.paper.y+self.graph[i][2], self.graph[i+1][1], self.paper.y+self.graph[i+1][2])
 	end
 end
