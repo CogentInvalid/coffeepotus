@@ -6,6 +6,13 @@ function paperwork:init(parent)
 
 	self.cursor = cursor:new({x=200,y=300})
 
+<<<<<<< HEAD
+=======
+	self.options = {"peas", "budget", "peas-reverse", "candy", "peas-quad", "war", "debt", "nuke", "debtReverse", "sign"}
+	self.papx = math.random(50,150); self.papy = math.random(100,200) --target paper position
+	self:getThing(randomSelect(self.options))
+
+>>>>>>> 5466222864acde00da537e085ad64cb7807077d8
 	self.state = "wait"
 
 	self.finished = false
@@ -28,6 +35,7 @@ function paperwork:getThing(thing)
 
 	self.paper = {img=imgMan:getImage(thing), x=xpos, y=ypos}
 	if thing == "peas" then
+		table.remove(self.options,0)
 		self.successZone = {85,227,129,274}
 		self.failZone = {141,227,178,269}
 		self.winString = "PEAS ACHIEVED"
