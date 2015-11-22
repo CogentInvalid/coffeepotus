@@ -29,7 +29,7 @@ function intermission:setGraph(pts)
 
 	end
 
-	if math.abs(ratingsHistory[#ratingsHistory] - ratingsHistory[1]) < 6 then
+	if math.abs(ratingsHistory[#ratingsHistory] - ratingsHistory[1]) < 10 then
 		self.headline = "PRESIDENT'S RATINGS REMAIN STEADY"
 	elseif ratingsHistory[#ratingsHistory] > ratingsHistory[1] then
 		self.headline = "PRESIDENT'S RATINGS SOAR"
