@@ -32,16 +32,17 @@ function handsAndBabies:init(parent)
 			pos = math.random(str:len())
 		end
 		self.leanKey = str:sub(pos, pos)
-	elseif currentLevel >= 2 then
-		self.shakeKey = '2'
-		self.leanKey = '1'
 	else
 		self.shakeKey = '1'
 		self.leanKey = '2'
 	end
 
 	self.positions = {-120, 50, 220, 800, 800, 800}
-	self.types = {'adult', 'child'}
+	if currentLevel >= 2 then
+		self.types = {'adult', 'child'}
+	else
+		self.types = {'adult'}
+	end
 	self.currentShaker = 3
 
 	self.queue = {}

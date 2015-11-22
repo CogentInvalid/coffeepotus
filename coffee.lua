@@ -90,7 +90,7 @@ function coffee:newCup(x, y)
 	cup.destY = y
 
 	function cup.onClick()
-		if math.random() > 0.90 then
+		if currentLevel >= 2 and math.random() > 0.85 then
 			cup.destY = 700
 			self.hasCup = false
 		elseif cup.sipsLeft >= 1 then
@@ -238,7 +238,7 @@ function coffee:newFixer()
 
 		fixer.timer = fixer.timer + dt
 		if fixer.timer > 1 and self.fixed then
-			if math.random() > 0.95 and not self.filling then
+			if math.random() > 0.95 and not self.filling and currentLevel >= 2 then
 				self.fixed = false
 				fixer.lights = imgMan:getImage('maker-status-broken')
 			end

@@ -85,7 +85,7 @@ function game:update(delta)
 					ratingsHistory[#ratingsHistory+1] = ratings
 				else
 					sfx['boo']:play()
-					ratings = ratings - math.random(5,9)
+					ratings = ratings - math.random(9, 15)
 					ratingsHistory[#ratingsHistory+1] = ratings
 				end
 				self.endTimer = 0
