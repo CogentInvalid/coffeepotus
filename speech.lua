@@ -70,11 +70,11 @@ function speech:getThing(thing)
 	if thing == "guns" then
 		self.question = "What is your stance on gun control?"
 		op[1] = {"I am strongly opposed to\nthe arming of bears.", false, 2}
-		op[2] = {"Reasonable restrictions\nshould placed on guns", true, 2}
+		op[2] = {"Reasonable restrictions\nshould be placed on guns", true, 2}
 		op[3] = {"The right to bear arms is\nsacred", true, 2}
 		self.winString = "A reasonable stance."
 		self.loseString = "The bears would hardly approve"
-		self.winPaper = {"PRESIDENT ENDS GUN CONTROL DEBATE","DEBATE MOVES ONTO EXPLOSIVES CONTROL DEBATES"}
+		self.winPaper = {"PRES ENDS DEBATE","DEBATE MOVES ONTO EXPLOSIVES CONTROL DEBATES"}
 		self.losePaper = {"PRESIDENT HATES BEARS", "POLLING DROPS AMONG BEAR DEMOGRAPHIC"}
 	end
 		
