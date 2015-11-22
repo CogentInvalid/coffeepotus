@@ -7,6 +7,7 @@ require "audioManager"
 require "debugger"
 require "game"
 require "coffee"
+require "intermission"
 
 function love.load()
 
@@ -25,6 +26,7 @@ function love.load()
 
 	gameScreen = game:new()
 	coffeeScreen = coffee:new()
+	interScreen = intermission:new()
 
 	tut = {}
 	tut[1] = {y=600,img=imgMan:getImage("tut1")}
@@ -37,10 +39,12 @@ function love.load()
 	gameStarted = false
 
 	currentLevel = 1
+	ratings = 100
+	ratingsHistory = {100}
+	intermission = false
 
 	-- comment these out to give playtesters an easy time
-	nextLevel()
-	nextLevel()
+	--nextLevel()
 
 end
 
@@ -54,8 +58,16 @@ function love.update(dt)
 			promptx = promptx - (promptx - (50+350*currentTut))*3*dt
 		end
 	else
-		gameScreen:update(dt)
-		coffeeScreen:update(dt)
+		if not intermission then
+			gameScreen:update(dt)
+			coffeeScreen:update(dt)
+		end
+		if intermission then
+			interScreen:update(dt)
+		end
+		if gameScreen.gamesPlayed >= 3 then
+			nextLevel()
+		end
 	end
 
 	debugger:update(dt)
@@ -63,21 +75,29 @@ function love.update(dt)
 end
 
 function nextLevel()
+	intermission = true
+	interScreen:setGraph(ratingsHistory)
 	currentLevel = currentLevel + 1
+	gameScreen.gamesPlayed = 0
 	gameScreen.wobble = gameScreen.wobble + 0.15
+	coffeeScreen.meter = 1
 	coffeeScreen.drainRate = coffeeScreen.drainRate + 0.005
 end
 
 function love.draw()
 
-	gameScreen:draw(dt)
-	coffeeScreen:draw(dt)
+	if not intermission then
+		gameScreen:draw()
+		coffeeScreen:draw()
+	else
+		interScreen:draw()
+	end
 
 	if not gameStarted then
 		love.graphics.setColor(50,35,0)
 		love.graphics.rectangle("fill", 0, 0, 1000, 600)
 		love.graphics.setColor(255,255,255)
-		for i=1, 3 do
+		for i=1, 8 do
 			love.graphics.draw(tut[i].img, 0, tut[i].y)
 		end
 		love.graphics.draw(spaceprompt, promptx, 250)
@@ -89,12 +109,18 @@ end
 
 function love.keypressed(key)
 
-	if not gameStarted then
-		if key == " " then currentTut = currentTut + 1; sfx['paper']:play() end
-		if currentTut == 4 then gameStarted = true end
+	if key == " " and intermission then
+		intermission = false
 	else
-		gameScreen:keypressed(key)
-		coffeeScreen:keypressed(key)
+
+		if not gameStarted then
+			if key == " " then currentTut = currentTut + 1; sfx['paper']:play() end
+			if currentTut == 4 then gameStarted = true end
+		else
+			gameScreen:keypressed(key)
+			coffeeScreen:keypressed(key)
+		end
+
 	end
 
 	--if key == "1" then currentMode = gameMode end

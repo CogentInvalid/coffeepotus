@@ -60,7 +60,7 @@ function speech:getThing(thing)
 		self.question = "What do you say to the allegations levied against you?"
 		op[1] = {"I believe with full\nconviction that the\nalligators are false!", false, 3}
 		op[2] = {"LOL what a joke! I'm\nthe coolest president ever.", true, 2}
-		op[3] = {"I allegate that there\nARE no allegations.", true, 2}
+		op[3] = {"I allege that there\nARE no allegations.", true, 2}
 		self.winString = "Huh, I never thought of it like that."
 		self.loseString = "How insulting! Some of my best friends are alligators!"
 		self.winPaper = {"CONTROVERSY AVERTED", "ONLY SPOTS ON PRESIDENT'S RECORD ARE COFFEE STAINS"}

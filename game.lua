@@ -27,6 +27,7 @@ function game:init()
 	self.minigames = {paperwork, speech, handsAndBabies, strategy}
 	local randgame = randomSelect(self.minigames)
 	self.currentMinigame = randgame:new(self)
+	self.gamesPlayed = 0
 
 	self.endPaper = {x=0, y=600}
 	self.news = imgMan:getImage("newspaper")
@@ -79,8 +80,13 @@ function game:update(delta)
 			if self.endTimer <= 0 then
 				if self.currentMinigame.state == 'win' then
 					sfx['yay']:play()
+					ratings = ratings + math.random(3,8)
+					if ratings > 100 then ratings = 100 end
+					ratingsHistory[#ratingsHistory+1] = ratings
 				else
 					sfx['boo']:play()
+					ratings = ratings - math.random(3,7)
+					ratingsHistory[#ratingsHistory+1] = ratings
 				end
 				self.endTimer = 0
 				self.paperTimer = 3.5
@@ -93,9 +99,10 @@ function game:update(delta)
 		if self.paperTimer > 0 then
 			self.paperTimer = self.paperTimer - dt
 			if self.paperTimer <= 0 then
+				self.timer = 10
+				self.gamesPlayed = self.gamesPlayed + 1
 				local randgame = randomSelect(self.minigames)
 				self.currentMinigame = randgame:new(self)
-				self.timer = 10
 			end
 
 			self.endPaper.y = self.endPaper.y - (self.endPaper.y - 0)*10*dt

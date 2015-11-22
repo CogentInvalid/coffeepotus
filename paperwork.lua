@@ -6,18 +6,13 @@ function paperwork:init(parent)
 
 	self.cursor = cursor:new({x=200,y=300})
 
-	self.options = {"peas", "budget", "peas-reverse", "candy", "peas-quad", "war", "debt", "nuke", "debtReverse", "sign"}
-	self.papx = math.random(50,150); self.papy = math.random(100,200) --target paper position
-	self:getThing(randomSelect(self.options))
-
 	self.state = "wait"
 
 	self.finished = false
 	self.headline = "PRES IS LAZY"
 	self.subtitle = "FAILS TO TAKE ACTION ON CRITICAL ISSUE"
 
-	--local options = {"peas", "budget", "peas-reverse", "candy", "peas-quad", "war", "debt", "nuke", "debtReverse", "sign"}
-	local options = {"sign"}
+	local options = {"peas", "budget", "peas-reverse", "candy", "peas-quad", "war", "debt", "nuke", "debtReverse", "sign"}
 	self.papx = math.random(50,150); self.papy = math.random(100,200) --target paper position
 	self:getThing(randomSelect(options))
 
@@ -108,6 +103,7 @@ function paperwork:getThing(thing)
 	end
 	if thing == "sign" then
 		self.state = "win"
+		self.parent.timer = 6
 		self.successZone = {0,0,0,0}
 		self.failZone = {85,228,180,267}
 		self.loseString = "WAIT, WHAT DID YOU JUST SIGN?"
@@ -125,7 +121,7 @@ function paperwork:update(dt)
 		self.cursor:update(dt)
 	end
 
-	debug(love.mouse.getX()-self.paper.x..', '..love.mouse.getY()-self.paper.y)
+	--debug(love.mouse.getX()-self.paper.x..', '..love.mouse.getY()-self.paper.y)
 
 	self.paper.x = self.paper.x - (self.paper.x - self.papx)*5*dt
 	self.paper.y = self.paper.y - (self.paper.y - self.papy)*5*dt
