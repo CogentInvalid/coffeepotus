@@ -4,12 +4,14 @@ function speech:init(parent)
 
 	self.parent = parent
 
-	local options = {"games", "jews", "colors", "allegations", "guns", "taxes", "geneology", "food", "war", "policy"}
+	local options = {"games", "jews", "colors", "allegations", "guns", "taxes", "geneology", "food", "war", "policy", "guy"}
 	self:getThing(randomSelect(options))
 
 	self.state = "wait"
 
 	self.answerTimer = 1
+
+	self.garbleRate = self.parent.wobble/2.5
 
 	self.finishTime = 4
 
@@ -103,9 +105,9 @@ function speech:getThing(thing)
 		op[1] = {"Hamburger", true, 1}
 		op[2] = {"Pizza", true, 1}
 		op[3] = {"Whale", false, 1}
-		self.winString = "An American Classic"
+		self.winString = "An American classic."
 		self.loseString = "The poor whales..."
-		self.winPaper = {"PRESIDENT HAS GOOD TASTE IN FOOD", "FEW ARE SURPRISED"}
+		self.winPaper = {"PRES HAS GOOD TASTE IN FOOD", "FEW ARE SURPRISED"}
 		self.losePaper = {"PRESIDENT EATS WHALES", "ANIMAL CONSERVATIONISTS HORRIFIED"}
 	end
 
@@ -117,21 +119,30 @@ function speech:getThing(thing)
 		self.winString = "(standing ovation)"
 		self.loseString = "WOW. You're so bad at this."
 		self.winPaper = {"PRESIDENT MENTIONS 9/11", "PRESIDENT MENTIONS 9/11"}
-		self.losePaper = {"PRESIDENT UNINFORMED", "IS HE EVEN FIT TO LEAD OUR NATION? (NO)"}
+		self.losePaper = {"PRESIDENT UNINFORMED", "ARE THEY EVEN FIT TO LEAD OUR NATION? (NO)"}
 	end
 	
 	if thing == "war" then
 		self.question = "How do you plan to wage the war on terror?"
-		op[1] = {"With carefully calculation", true, 1}
-		op[2] = {"With rapid strikes", true, 1}
+		op[1] = {"With careful calculation\nand strategy", true, 2}
+		op[2] = {"With rapid, unrelenting\nstrikes", true, 2}
 		op[3] = {"By deploying more trolls", false, 1}
 		self.winString = "A good plan"
 		self.loseString = "A strange plan..."
 		self.winPaper = {"PRESIDENT PLANS BOLD OFFENSIVE", "MORALE OF TROOPS INCREASES"}
-		self.losePaper = {"PRES REQUESTS TROLL DEPLOYMENT", "THE TROLLS HAVE NOT YET BEEN LOCATED"}
+		self.losePaper = {"TROLL ENLISTMENT PLANNED", "THE TROLLS HAVE NOT YET BEEN LOCATED"}
 	end
 	
-	
+	if thing == "guy" then
+		self.question = "hey why cant i be the president i promise ill do a good job"
+		op[1] = {"No, you can be the\npresident.", false, 2}
+		op[2] = {"I'm pretty sure you have\nto get elected first.", true, 2}
+		op[3] = {"Absolutely not.", true, 1}
+		self.winString = "aw come on dude i really want to be president"
+		self.loseString = "haha thanks man i promise i wont let you down"
+		self.winPaper = {"PRES REFUSES TO GIVE UP JOB", "PROOF THAT THEY STILL HAVE COMMAND OF THEIR MENTAL FACULTIES"}
+		self.losePaper = {"RANDOM GUY MADE PRESIDENT", "CALLS JOB 'TOO HARD', GIVES IT BACK TO ORIGINAL PRESIDENT WITHIN THE MONTH"}
+	end
 	
 	local ugh = {false,false,false}
 	self.answer = {}
@@ -167,9 +178,9 @@ end
 function speech:update(dt)
 
 	if not self.finished then
-		if math.random(3) == 1 then self.a1 = self:garble(self.answer[1][1], 0.2) end
-		if math.random(3) == 1 then self.a2 = self:garble(self.answer[2][1], 0.2) end
-		if math.random(3) == 1 then self.a3 = self:garble(self.answer[3][1], 0.2) end
+		if math.random(3) == 1 then self.a1 = self:garble(self.answer[1][1], self.garbleRate) end
+		if math.random(3) == 1 then self.a2 = self:garble(self.answer[2][1], self.garbleRate) end
+		if math.random(3) == 1 then self.a3 = self:garble(self.answer[3][1], self.garbleRate) end
 	end
 
 	self.answerTimer = self.answerTimer - dt

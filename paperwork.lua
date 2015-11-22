@@ -6,7 +6,11 @@ function paperwork:init(parent)
 
 	self.cursor = cursor:new({x=200,y=300})
 
+<<<<<<< HEAD
 	local options = {"peas", "budget", "peas-reverse", "candy", "peas-quad", "war", "debt"}
+=======
+	local options = {"peas", "budget", "peas-reverse", "candy", "peas-quad", "nuke"}
+>>>>>>> origin/master
 	self.papx = math.random(50,150); self.papy = math.random(100,200) --target paper position
 	self:getThing(randomSelect(options))
 
@@ -66,6 +70,7 @@ function paperwork:getThing(thing)
 		self.winPaper = {"'A CANDY FOR EVERY CHILD'", "PRES PROBABLY CAN'T DELIVER ON HIS PROMISE BUT IT'S THE THOUGHT THAT COUNTS"}
 		self.losePaper = {"CANDY OUTLAWED", "MILLIONS OF SMALL CHILDREN STARVE TO DEATH"}
 	end
+<<<<<<< HEAD
 	if thing == "war" then
 		self.successZone = {85,227,129,274}
 		self.failZone = {141,227,178,269}
@@ -82,6 +87,16 @@ function paperwork:getThing(thing)
 		self.winPaper("PRESIDENT AVOIDS DEBT CRISIS", "POPULACE RELIEVED")
 		self.losePaper("DEBT CRISIS CREATED", "ANALYSTS BLAME A CLERICAL ERROR")
 		
+=======
+	if thing == "nuke" then
+		self.successZone = {90,138,127,170}
+		self.failZone = {130,141,170,174}
+		self.loseString = "MISSILE LAUNCHED"
+		self.winString = "WAR AVERTED"
+		self.winPaper = {"NOTHING BAD HAPPENS", "LOREM IPSUM DOLOR SID AMET, CONSECITUR ADIPISCING ELIT"}
+		self.losePaper = {"US DECLARES WAR ON CHINA", "ECONOMY CRASHES AS IMPORTS SLOW TO A CRAWL"}
+	end
+>>>>>>> origin/master
 
 end
 

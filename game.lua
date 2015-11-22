@@ -1,5 +1,6 @@
 require "paperwork"
 require "speech"
+require "handsandbabies"
 require "ent/gameObject"
 require "ent/cursor"
 
@@ -16,15 +17,20 @@ function game:init()
 	--components
 	self.component = {}
 
-	--gameplay stuff
-	self.minigames = {paperwork, speech}
-	local randgame = randomSelect(self.minigames)
-	self.currentMinigame = randgame:new(self)
-
 	self.wobble = 0.5
 	self.timer = 10
 	self.endTimer = 0
 	self.paperTimer = 0
+
+	--gameplay stuff
+	self.minigames = {paperwork, speech, handsAndBabies}
+	local randgame = randomSelect(self.minigames)
+	self.currentMinigame = randgame:new(self)
+
+	--gameplay stuff
+	self.minigames = {paperwork, speech}
+	local randgame = randomSelect(self.minigames)
+	self.currentMinigame = randgame:new(self)
 
 	self.endPaper = {x=0, y=600}
 	self.news = imgMan:getImage("newspaper")
