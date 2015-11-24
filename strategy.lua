@@ -41,7 +41,7 @@ function strategy:getThing(thing)
 		self.winSubtitle = "GENERAL: 'IT WAS TOUGH, BUT WE MANAGED TO AVOID STUMBLING HEADLONG INTO THE WATER'"
 	end
 	if thing == "map3" then
-		self.cursor.phys:setPos(61-self.cursor.phys.w/2,300-self.cursor.phys.h/2)
+		self.cursor.phys:setPos(85-self.cursor.phys.w/2,300-self.cursor.phys.h/2)
 		self.winHeadline = "ARMY CORRECTLY IDENTIFIES TARGET"
 		self.winSubtitle = "GENERAL: 'NO, WE DON'T MEAN THE STORE'"
 	end

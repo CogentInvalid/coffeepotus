@@ -33,7 +33,7 @@ function intermission:setGraph(pts)
 
 	end
 
-	if math.abs(ratingsHistory[#ratingsHistory] - ratingsHistory[1]) < 10 then
+	if math.abs(ratingsHistory[#ratingsHistory] - ratingsHistory[1]) < 15 then
 		self.headline = "PRESIDENT'S RATINGS REMAIN STEADY"
 		self.subtitle = "WATER REMAINS WET, SKY REMAINS BLUE\nPRESS SPACE TO CONTINUE"
 	elseif ratingsHistory[#ratingsHistory] > ratingsHistory[1] then
@@ -75,5 +75,5 @@ function intermission:draw()
 		love.graphics.line(self.graph[i][1], self.paper.y+self.graph[i][2], self.graph[i+1][1], self.paper.y+self.graph[i+1][2])
 	end
 
-	love.graphics.print(self.months[(currentLevel % 12) + 1], 525 + self.paper.y, 500)
+	love.graphics.print(self.months[(currentLevel % 12) + 1], 525, 500 + self.paper.y)
 end
