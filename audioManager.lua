@@ -13,6 +13,7 @@ function audioManager:init()
 		end
 	end
 
+	sfx['yay']:setVolume(0.5)
 	currentTrack = sfx['bg-music']
 	currentTrack:play()
 	currentTrack:setLooping(true)
